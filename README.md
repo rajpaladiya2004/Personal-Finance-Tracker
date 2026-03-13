@@ -50,6 +50,8 @@ This is a university portfolio project for the course "Project Java and Web Deve
 
 ## Project Structure
 - `finance_tracker/` - Main project configuration
+- `expenses/` - Django app for managing income and expenses
 - `templates/` - HTML templates
+  - `expenses/` - Templates for expenses app
 - `static/` - CSS, JavaScript, and images
 - `media/` - User uploaded files
