@@ -1,29 +1,14 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Personal Finance Tracker</title>
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %}Register - Personal Finance Tracker{% endblock %}
+
+{% block content %}
     <h1>Create an Account</h1>
 
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
-
     <form method="POST">
-        {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Register</button>
     </form>
 
     <p>Already have an account? <a href="{% url 'expenses:login' %}">Login here</a></p>
-
-    <script src="{% static 'js/main.js' %}"></script>
-</body>
-</html>
+{% endblock %}
