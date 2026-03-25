@@ -58,3 +58,9 @@ def add_category(request):
         form = CategoryForm()
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/add_category.html', {'form': form, 'categories': categories})
+
+
+@login_required
+def category_list(request):
+    categories = Category.objects.all().order_by('name')
+    return render(request, 'expenses/category_list.html', {'categories': categories})

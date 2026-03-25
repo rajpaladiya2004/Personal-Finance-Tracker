@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Categories - Personal Finance Tracker{% endblock %}
+
+{% block content %}
+    <h1>All Categories</h1>
+
+    <a href="{% url 'expenses:add_category' %}">+ Add New Category</a>
+
+    {% if categories %}
+        <ul>
+            {% for category in categories %}
+                <li>{{ category.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No categories found. <a href="{% url 'expenses:add_category' %}">Add one now.</a></p>
+    {% endif %}
+
+    <p><a href="{% url 'expenses:home' %}">Back to Home</a></p>
+{% endblock %}
