@@ -3,8 +3,8 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import CategoryForm
-from .models import Category
+from .forms import CategoryForm, TransactionForm
+from .models import Category, Transaction
 
 
 def home(request):
@@ -64,3 +64,16 @@ def add_category(request):
 def category_list(request):
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
+
+
+@login_required
+def add_transaction(request):
+    if request.method == 'POST':
+        form = TransactionForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Transaction added successfully.')
+            return redirect('expenses:transaction_list')
+    else:
+        form = TransactionForm()
+    return render(request, 'expenses/add_transaction.html', {'form': form})
