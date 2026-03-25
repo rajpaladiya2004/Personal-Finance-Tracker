@@ -8,11 +8,22 @@
     <a href="{% url 'expenses:add_category' %}">+ Add New Category</a>
 
     {% if categories %}
-        <ul>
-            {% for category in categories %}
-                <li>{{ category.name }}</li>
-            {% endfor %}
-        </ul>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Category Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categories %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ category.Name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>No categories found. <a href="{% url 'expenses:add_category' %}">Add one now.</a></p>
     {% endif %}
