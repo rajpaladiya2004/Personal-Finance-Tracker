@@ -7,9 +7,23 @@
 
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Category</button>
+        <label for="id_name">Category Name:</label>
+        {{ form.name }}
+        {{ form.name.errors }}
+        <br>
+        <button type="submit">Save Categry</button>
     </form>
 
     <p><a href="{% url 'expenses:home' %}">Back to Home</a></p>
+
+    <h2>Existing Categories</h2>
+    {% if categories %}
+        <ul>
+            {% for cat in categoreis %}
+                <li>{{ cat.name }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No categories yet.</p>
+    {% endif %}
 {% endblock %}

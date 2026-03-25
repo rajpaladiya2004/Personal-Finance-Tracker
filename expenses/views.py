@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import CategoryForm
+from .models import Category
 
 
 def home(request):
@@ -55,4 +56,5 @@ def add_category(request):
             return redirect('expenses:add_category')
     else:
         form = CategoryForm()
-    return render(request, 'expenses/add_category.html', {'form': form})
+    categories = Category.objects.all().order_by('name')
+    return render(request, 'expenses/add_category.html', {'form': form, 'categories': categories})
