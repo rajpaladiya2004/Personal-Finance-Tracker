@@ -73,7 +73,7 @@ def add_transaction(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Transaction added successfully.')
-            return redirect('expenses:transaction_list')
+            return redirect('expenses:home')
     else:
         form = TransactionForm()
     return render(request, 'expenses/add_transaction.html', {'form': form})
