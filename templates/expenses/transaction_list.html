@@ -16,6 +16,7 @@
                     <th>Amount</th>
                     <th>Type</th>
                     <th>Category</th>
+                    <th>Description</th>
                     <th>Date</th>
                 </tr>
             </thead>
@@ -25,8 +26,9 @@
                     <td>{{ forloop.counter }}</td>
                     <td>{{ transaction.title }}</td>
                     <td>{{ transaction.amount }}</td>
-                    <td>{{ transaction.transaction_type }}</td>
+                    <td>{{ transaction.get_transaction_type_display }}</td>
                     <td>{{ transaction.category }}</td>
+                    <td>{{ transaction.discription }}</td>
                     <td>{{ transaction.date }}</td>
                 </tr>
                 {% endfor %}
