@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Sum
 from .forms import CategoryForm, TransactionForm
 from .models import Category, Transaction
 
@@ -89,7 +90,6 @@ def transaction_list(request):
 
 @login_required
 def dashboard(request):
-    from django.db.models import Sum
     total_income = Transaction.objects.filter(
         transaction_type='income'
     ).aggregate(Sum('amount'))['amount__sum'] or 0
