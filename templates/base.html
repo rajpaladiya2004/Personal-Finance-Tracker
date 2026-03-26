@@ -15,7 +15,7 @@
             <a href="{% url 'expenses:category_list' %}">Categories</a> |
             <a href="{% url 'expenses:add_transaction' %}">Add Transaction</a> |
             <span>Hello, {{ request.user.username }}</span> |
-            <a href="{% url 'expenses:logut' %}">Logout</a>
+            <a href="{% url 'expenses:logout' %}">Logout</a>
         {% else %}
             <a href="{% url 'expenses:login' %}">Login</a> |
             <a href="{% url 'expenses:register' %}">Register</a>
