@@ -8,6 +8,8 @@ from .models import Category, Transaction
 
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('expenses:dashboard')
     return render(request, 'expenses/home.html')
 
 
@@ -83,3 +85,27 @@ def add_transaction(request):
 def transaction_list(request):
     transactions = Transaction.objects.all().order_by('-date')
     return render(request, 'expenses/transaction_list.html', {'transactions': transactions})
+
+
+@login_required
+def dashboard(request):
+    from django.db.models import Sum
+    total_income = Transaction.objects.filter(
+        transaction_type='income'
+    ).aggregate(Sum('amount'))['amount__sum'] or 0
+
+    total_expenses = Transaction.objects.filter(
+        transaction_type='expense'
+    ).aggregate(Sum('amount'))['amount__sum'] or 0
+
+    balance = total_income - total_expenses
+
+    recent_transactions = Transaction.objects.all().order_by('-date')[:5]
+
+    context = {
+        'total_income': total_income,
+        'total_expenses': total_expenses,
+        'balance': balance,
+        'recent_transactions': recent_transactions,
+    }
+    return render(request, 'expenses/dashboard.html', context)
