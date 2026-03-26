@@ -73,7 +73,13 @@ def add_transaction(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Transaction added successfully.')
-            return redirect('expenses:home')
+            return redirect('expenses:transaction_list')
     else:
         form = TransactionForm()
     return render(request, 'expenses/add_transaction.html', {'form': form})
+
+
+@login_required
+def transaction_list(request):
+    transactions = Transaction.objects.all().order_by('-date')
+    return render(request, 'expenses/transaction_list.html', {'transactions': transactions})

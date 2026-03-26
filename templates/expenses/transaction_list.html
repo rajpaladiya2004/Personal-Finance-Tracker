@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Transactions - Personal Finance Tracker{% endblock %}
+
+{% block content %}
+    <h1>All Transactions</h1>
+
+    <a href="{% url 'expenses:add_transaction' %}">+ Add New Transaction</a>
+
+    {% if transactions %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for transaction in transactions %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ transaction.title }}</td>
+                    <td>{{ transaction.amount }}</td>
+                    <td>{{ transaction.transaction_type }}</td>
+                    <td>{{ transaction.category }}</td>
+                    <td>{{ transaction.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No transactions yet. <a href="{% url 'expenses:add_transaction' %}">Add one now.</a></p>
+    {% endif %}
+
+    <p><a href="{% url 'expenses:home' %}">Back to Home</a></p>
+{% endblock %}
