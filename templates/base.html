@@ -10,6 +10,7 @@
 <body>
     <nav>
         {% if request.user.is_authenticated %}
+            <a href="{% url 'expenses:dashboard' %}">Dashboard</a> |
             <span>Hello, {{ request.user.username }}</span>
             <a href="{% url 'expenses:logout' %}">Logout</a>
         {% else %}
