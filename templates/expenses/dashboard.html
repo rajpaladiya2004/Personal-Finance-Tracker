@@ -5,23 +5,24 @@
 {% block content %}
     <h1>Dashboard</h1>
 
-    <h2>Financial Summary</h2>
-    <table border="1" cellpadding="5">
-        <tr>
-            <th>Total Income</th>
-            <th>Total Expenses</th>
-            <th>Balance</th>
-        </tr>
-        <tr>
-            <td>{{ total_income }}</td>
-            <td>{{ total_expenses }}</td>
-            <td>{{ balance }}</td>
-        </tr>
-    </table>
+    <div class="summary-boxes">
+        <div class="summary-box income">
+            <h3>Total Income</h3>
+            <p>{{ total_income }}</p>
+        </div>
+        <div class="summary-box expense">
+            <h3>Total Expenses</h3>
+            <p>{{ total_expenses }}</p>
+        </div>
+        <div class="summary-box balance">
+            <h3>Balance</h3>
+            <p>{{ balance }}</p>
+        </div>
+    </div>
 
     <h2>Recent Transactions</h2>
     {% if recent_transactions %}
-        <table border="1" cellpadding="5">
+        <table>
             <thead>
                 <tr>
                     <th>Title</th>

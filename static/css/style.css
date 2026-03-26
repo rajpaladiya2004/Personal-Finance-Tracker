@@ -104,3 +104,43 @@ p {
     margin: 10px 0;
     line-height: 1.6;
 }
+
+/* Summary Boxes */
+.summary-boxes {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.summary-box {
+    flex: 1;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 20px;
+    text-align: center;
+}
+
+.summary-box h3 {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.summary-box p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+.summary-box.income p {
+    color: #27ae60;
+}
+
+.summary-box.expense p {
+    color: #e74c3c;
+}
+
+.summary-box.balance p {
+    color: #2980b9;
+}
