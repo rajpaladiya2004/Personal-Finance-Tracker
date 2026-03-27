@@ -102,10 +102,15 @@ def dashboard(request):
 
     recent_transactions = Transaction.objects.all().order_by('-date')[:5]
 
+    category_expenses = Transaction.objects.filter(
+        transaction_type='expenses'
+    ).values('category__name').annotate(total=Sum('amount')).order_by('-total')
+
     context = {
         'total_income': total_income,
         'total_expenses': total_expenses,
         'balance': balance,
         'recent_transactions': recent_transactions,
+        'category_expenses': category_expenses,
     }
     return render(request, 'expenses/dashboard.html', context)
