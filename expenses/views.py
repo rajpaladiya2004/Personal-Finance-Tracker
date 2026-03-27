@@ -103,7 +103,7 @@ def dashboard(request):
     recent_transactions = Transaction.objects.all().order_by('-date')[:5]
 
     category_expenses = Transaction.objects.filter(
-        transaction_type='expenses'
+        transaction_type='expense'
     ).values('category__name').annotate(total=Sum('amount')).order_by('-total')
 
     context = {

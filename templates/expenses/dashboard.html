@@ -32,7 +32,7 @@
             <tbody>
                 {% for item in category_expenses %}
                 <tr>
-                    <td>{{ item.category_name }}</td>
+                    <td>{{ item.category__name|default:"Uncategorized" }}</td>
                     <td>{{ item.total }}</td>
                 </tr>
                 {% endfor %}
