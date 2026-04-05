@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
+from django.db.models.functions import TruncMonth
 from .forms import CategoryForm, TransactionForm
 from .models import Category, Transaction
 
@@ -106,11 +107,18 @@ def dashboard(request):
         transaction_type='expense'
     ).values('category__name').annotate(total=Sum('amount')).order_by('-total')
 
+    monthly_expenses = Transaction.objects.filter(
+        transaction_type='expense'
+    ).annotate(month=TruncMonth('date')).values('month').annotate(
+        total=Sum('amount')
+    ).order_by('-month')
+
     context = {
         'total_income': total_income,
         'total_expenses': total_expenses,
         'balance': balance,
         'recent_transactions': recent_transactions,
         'category_expenses': category_expenses,
+        'monthly_expenses': monthly_expenses,
     }
     return render(request, 'expenses/dashboard.html', context)

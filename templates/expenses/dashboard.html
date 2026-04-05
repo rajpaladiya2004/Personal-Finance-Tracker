@@ -42,6 +42,28 @@
         <p>No expense data yet.</p>
     {% endif %}
 
+    <h2>Monthly Expenses</h2>
+    {% if monthly_expenses %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Total Spent</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in monthly_expenses %}
+                <tr>
+                    <td>{{ item.month|date:"F Y" }}</td>
+                    <td>{{ item.total }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No monthly expense data yet.</p>
+    {% endif %}
+
     <h2>Recent Transactions</h2>
     {% if recent_transactions %}
         <table>
