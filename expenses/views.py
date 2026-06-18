@@ -23,6 +23,7 @@ def register(request):
             form.save()
             messages.success(request, 'Account created successfully. Please log in.')
             return redirect('expenses:login')
+        messages.error(request, 'Please correct the registration errors below.')
     else:
         form = RegisterForm()
     return render(request, 'expenses/register.html', {'form': form})

@@ -85,6 +85,33 @@ class RegistrationTests(TestCase):
             'newstudent@example.com',
         )
 
+    def test_register_page_shows_error_message_for_invalid_data(self):
+        User.objects.create_user(
+            username='existinguser',
+            email='existing@example.com',
+            password='testpass12345',
+        )
+
+        response = self.client.post(
+            reverse('expenses:register'),
+            {
+                'username': 'existinguser',
+                'email': 'existing@example.com',
+                'password1': 'testpass12345',
+                'password2': 'differentpass123',
+            },
+        )
+
+        messages = list(get_messages(response.wsgi_request))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Please correct the registration errors below.',
+        )
+        self.assertEqual(messages[0].tags, 'error')
+
 
 class EditTransactionTests(TestCase):
     def setUp(self):
