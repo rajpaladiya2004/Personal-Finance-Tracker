@@ -101,7 +101,7 @@ def dashboard(request):
 
     balance = total_income - total_expenses
 
-    recent_transactions = Transaction.objects.all().order_by('-date')[:5]
+    recent_transactions = Transaction.objects.all().order_by('-date', '-created_at')[:5]
 
     category_expenses = Transaction.objects.filter(
         transaction_type='expense'
