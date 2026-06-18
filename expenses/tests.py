@@ -91,3 +91,40 @@ class EditTransactionTests(TestCase):
         self.assertEqual(self.transaction.title, 'Updated Groceries')
         self.assertEqual(str(self.transaction.amount), '30.00')
         self.assertEqual(self.transaction.description, 'Updated shopping')
+
+
+class DeleteTransactionTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='student',
+            password='testpass123',
+        )
+        self.transaction = Transaction.objects.create(
+            title='Bus Ticket',
+            amount='5.00',
+            transaction_type='expense',
+            description='Travel cost',
+            date=date(2026, 4, 1),
+        )
+
+    def test_delete_transaction_removes_item_and_redirects(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(
+            reverse('expenses:delete_transaction', args=[self.transaction.id])
+        )
+
+        self.assertRedirects(response, reverse('expenses:transaction_list'))
+        self.assertFalse(
+            Transaction.objects.filter(id=self.transaction.id).exists()
+        )
+
+    def test_transaction_list_shows_delete_link(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(reverse('expenses:transaction_list'))
+
+        self.assertContains(
+            response,
+            reverse('expenses:delete_transaction', args=[self.transaction.id]),
+        )

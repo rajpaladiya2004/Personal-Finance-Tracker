@@ -100,6 +100,14 @@ def edit_transaction(request, transaction_id):
 
 
 @login_required
+def delete_transaction(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+    transaction.delete()
+    messages.success(request, 'Transaction deleted successfully.')
+    return redirect('expenses:transaction_list')
+
+
+@login_required
 def transaction_list(request):
     transactions = Transaction.objects.all().order_by('-date')
     return render(request, 'expenses/transaction_list.html', {'transactions': transactions})

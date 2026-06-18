@@ -18,7 +18,7 @@
                     <th>Category</th>
                     <th>Description</th>
                     <th>Date</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,7 +31,10 @@
                     <td>{{ transaction.category }}</td>
                     <td>{{ transaction.description }}</td>
                     <td>{{ transaction.date }}</td>
-                    <td><a href="{% url 'expenses:edit_transaction' transaction.id %}">Edit</a></td>
+                    <td>
+                        <a href="{% url 'expenses:edit_transaction' transaction.id %}">Edit</a>
+                        <a href="{% url 'expenses:delete_transaction' transaction.id %}">Delete</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
