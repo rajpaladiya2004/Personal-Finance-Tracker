@@ -2,6 +2,7 @@ from datetime import date, timedelta
 
 from django.contrib.auth.models import User
 from django.test import TestCase
+from django.urls import resolve
 from django.urls import reverse
 
 from .models import Transaction
@@ -62,6 +63,12 @@ class EditTransactionTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'Groceries')
         self.assertContains(response, 'Weekly shopping')
+
+    def test_edit_transaction_url_uses_plural_transactions_path(self):
+        edit_url = reverse('expenses:edit_transaction', args=[self.transaction.id])
+
+        self.assertEqual(edit_url, f'/transactions/edit/{self.transaction.id}/')
+        self.assertEqual(resolve(edit_url).func.__name__, 'edit_transaction')
 
     def test_edit_transaction_updates_and_redirects(self):
         self.client.login(username='student', password='testpass123')
