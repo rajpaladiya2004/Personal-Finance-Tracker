@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
@@ -81,6 +81,22 @@ def add_transaction(request):
     else:
         form = TransactionForm()
     return render(request, 'expenses/add_transaction.html', {'form': form})
+
+
+@login_required
+def edit_transaction(request, transaction_id):
+    transaction = get_object_or_404(Transaction, id=transaction_id)
+
+    if request.method == 'POST':
+        form = TransactionForm(request.POST, instance=transaction)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Transaction updated successfully.')
+            return redirect('expenses:transaction_list')
+    else:
+        form = TransactionForm(instance=transaction)
+
+    return render(request, 'expenses/edit_transaction.html', {'form': form, 'transaction': transaction})
 
 
 @login_required

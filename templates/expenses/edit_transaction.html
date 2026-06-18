@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Transaction - Personal Finance Tracker{% endblock %}
+
+{% block content %}
+    <h1>Edit Transaction</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <p>
+            <label for="{{ form.title.id_for_label }}">Title:</label>
+            {{ form.title }}
+            {{ form.title.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.amount.id_for_label }}">Amount:</label>
+            {{ form.amount }}
+            {{ form.amount.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.transaction_type.id_for_label }}">Type:</label>
+            {{ form.transaction_type }}
+            {{ form.transaction_type.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.category.id_for_label }}">Category:</label>
+            {{ form.category }}
+            {{ form.category.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.description.id_for_label }}">Description:</label>
+            {{ form.description }}
+            {{ form.description.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.date.id_for_label }}">Date:</label>
+            {{ form.date }}
+            {{ form.date.errors }}
+        </p>
+
+        <button type="submit">Update Transaction</button>
+    </form>
+
+    <p><a href="{% url 'expenses:transaction_list' %}">Back to Transactions</a></p>
+{% endblock %}

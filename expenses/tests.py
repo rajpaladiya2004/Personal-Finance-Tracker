@@ -36,3 +36,51 @@ class DashboardRecentTransactionsTests(TestCase):
         self.assertEqual(recent_transactions[-1].title, 'Transaction 2')
         self.assertContains(response, 'Transaction 6')
         self.assertNotContains(response, 'Transaction 1')
+
+
+class EditTransactionTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='student',
+            password='testpass123',
+        )
+        self.transaction = Transaction.objects.create(
+            title='Groceries',
+            amount='25.50',
+            transaction_type='expense',
+            description='Weekly shopping',
+            date=date(2026, 3, 10),
+        )
+
+    def test_edit_transaction_prefills_existing_data(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(
+            reverse('expenses:edit_transaction', args=[self.transaction.id])
+        )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Groceries')
+        self.assertContains(response, 'Weekly shopping')
+
+    def test_edit_transaction_updates_and_redirects(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.post(
+            reverse('expenses:edit_transaction', args=[self.transaction.id]),
+            {
+                'title': 'Updated Groceries',
+                'amount': '30.00',
+                'transaction_type': 'expense',
+                'description': 'Updated shopping',
+                'date': '2026-03-12',
+                'category': '',
+            },
+        )
+
+        self.transaction.refresh_from_db()
+
+        self.assertRedirects(response, reverse('expenses:transaction_list'))
+        self.assertEqual(self.transaction.title, 'Updated Groceries')
+        self.assertEqual(str(self.transaction.amount), '30.00')
+        self.assertEqual(self.transaction.description, 'Updated shopping')
