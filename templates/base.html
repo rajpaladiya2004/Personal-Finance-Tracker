@@ -25,7 +25,7 @@
     <div class="container">
         {% if messages %}
             {% for message in messages %}
-                <p>{{ message }}</p>
+                <p class="message {% if message.tags %}message-{{ message.tags }}{% endif %}">{{ message }}</p>
             {% endfor %}
         {% endif %}
 
