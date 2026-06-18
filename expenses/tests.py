@@ -142,3 +142,4 @@ class DeleteTransactionTests(TestCase):
         self.assertRedirects(response, reverse('expenses:transaction_list'))
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Transaction not found.')
+        self.assertEqual(messages[0].tags, 'error')
