@@ -1,6 +1,7 @@
 from datetime import date, timedelta
 
 from django.contrib.auth.models import User
+from django.contrib.messages import get_messages
 from django.test import TestCase
 from django.urls import resolve
 from django.urls import reverse
@@ -128,3 +129,16 @@ class DeleteTransactionTests(TestCase):
             response,
             reverse('expenses:delete_transaction', args=[self.transaction.id]),
         )
+
+    def test_delete_non_existing_transaction_shows_error_and_redirects(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(
+            reverse('expenses:delete_transaction', args=[9999])
+        )
+
+        messages = list(get_messages(response.wsgi_request))
+
+        self.assertRedirects(response, reverse('expenses:transaction_list'))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Transaction not found.')

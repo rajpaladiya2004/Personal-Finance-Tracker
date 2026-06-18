@@ -101,7 +101,12 @@ def edit_transaction(request, transaction_id):
 
 @login_required
 def delete_transaction(request, transaction_id):
-    transaction = get_object_or_404(Transaction, id=transaction_id)
+    transaction = Transaction.objects.filter(id=transaction_id).first()
+
+    if transaction is None:
+        messages.error(request, 'Transaction not found.')
+        return redirect('expenses:transaction_list')
+
     transaction.delete()
     messages.success(request, 'Transaction deleted successfully.')
     return redirect('expenses:transaction_list')
