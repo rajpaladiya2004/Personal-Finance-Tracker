@@ -7,7 +7,31 @@
 
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <p>
+            <label for="{{ form.username.id_for_label }}">Username:</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.email.id_for_label }}">Email:</label>
+            {{ form.email }}
+            {{ form.email.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.password1.id_for_label }}">Password:</label>
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+        </p>
+
         <button type="submit">Register</button>
     </form>
 

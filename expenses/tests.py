@@ -66,6 +66,26 @@ class AuthenticationTests(TestCase):
         self.assertRedirects(response, reverse('expenses:login'))
 
 
+class RegistrationTests(TestCase):
+    def test_register_page_creates_user_and_redirects_to_login(self):
+        response = self.client.post(
+            reverse('expenses:register'),
+            {
+                'username': 'newstudent',
+                'email': 'newstudent@example.com',
+                'password1': 'testpass12345',
+                'password2': 'testpass12345',
+            },
+        )
+
+        self.assertRedirects(response, reverse('expenses:login'))
+        self.assertTrue(User.objects.filter(username='newstudent').exists())
+        self.assertEqual(
+            User.objects.get(username='newstudent').email,
+            'newstudent@example.com',
+        )
+
+
 class EditTransactionTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(

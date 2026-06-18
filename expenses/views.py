@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
-from .forms import CategoryForm, TransactionForm
+from .forms import CategoryForm, RegisterForm, TransactionForm
 from .models import Category, Transaction
 
 
@@ -15,14 +14,17 @@ def home(request):
 
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('expenses:dashboard')
+
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
             messages.success(request, 'Account created successfully. Please log in.')
             return redirect('expenses:login')
     else:
-        form = UserCreationForm()
+        form = RegisterForm()
     return render(request, 'expenses/register.html', {'form': form})
 
 

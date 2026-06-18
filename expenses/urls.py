@@ -6,6 +6,7 @@ app_name = 'expenses'
 
 urlpatterns = [
     path('', views.home, name='home'),
+    path('register/', views.register, name='register'),
     path(
         'login/',
         auth_views.LoginView.as_view(
