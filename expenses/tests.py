@@ -40,6 +40,32 @@ class DashboardRecentTransactionsTests(TestCase):
         self.assertNotContains(response, 'Transaction 1')
 
 
+class AuthenticationTests(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='student',
+            password='testpass123',
+        )
+
+    def test_login_uses_built_in_view_and_redirects_to_dashboard(self):
+        response = self.client.post(
+            reverse('expenses:login'),
+            {
+                'username': 'student',
+                'password': 'testpass123',
+            },
+        )
+
+        self.assertRedirects(response, reverse('expenses:dashboard'))
+
+    def test_logout_redirects_to_login_page(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(reverse('expenses:logout'))
+
+        self.assertRedirects(response, reverse('expenses:login'))
+
+
 class EditTransactionTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(

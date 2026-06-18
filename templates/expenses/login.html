@@ -7,9 +7,19 @@
 
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
+
+        <p>
+            <label for="{{ form.username.id_for_label }}">Email or Username:</label>
+            {{ form.username }}
+            {{ form.username.errors }}
+        </p>
+
+        <p>
+            <label for="{{ form.password.id_for_label }}">Password:</label>
+            {{ form.password }}
+            {{ form.password.errors }}
+        </p>
+
         <button type="submit">Login</button>
     </form>
-
-    <p>Don't have an account? <a href="{% url 'expenses:register' %}">Register here</a></p>
 {% endblock %}

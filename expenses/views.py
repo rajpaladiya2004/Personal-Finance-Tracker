@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
@@ -25,29 +24,6 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'expenses/register.html', {'form': form})
-
-
-def user_login(request):
-    if request.user.is_authenticated:
-        return redirect('expenses:home')
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            messages.success(request, f'Welcome back, {user.username}!')
-            return redirect('expenses:home')
-        else:
-            messages.error(request, 'Invalid username or password.')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'expenses/login.html', {'form': form})
-
-
-def user_logout(request):
-    logout(request)
-    messages.success(request, 'You have been logged out.')
-    return redirect('expenses:login')
 
 
 @login_required
