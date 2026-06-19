@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
-from .forms import CategoryForm, RegisterForm, TransactionForm
-from .models import Category, Transaction
+from .forms import CategoryForm, RegisterForm, TransactionForm, UserProfileForm
+from .models import Category, Transaction, UserProfile
 
 
 def home(request):
@@ -41,6 +41,21 @@ def add_category(request):
         form = CategoryForm()
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/add_category.html', {'form': form, 'categories': categories})
+
+
+@login_required
+def profile(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('expenses:profile')
+    else:
+        form = UserProfileForm(instance=profile)
+
+    return render(request, 'expenses/profile.html', {'form': form, 'profile': profile})
 
 
 @login_required

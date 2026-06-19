@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Category, Transaction
+from .models import Category, Transaction, UserProfile
 
 
 class CategoryForm(forms.ModelForm):
@@ -34,3 +34,9 @@ class RegisterForm(UserCreationForm):
             raise forms.ValidationError('A user with that email already exists.')
 
         return email
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['phone_number']

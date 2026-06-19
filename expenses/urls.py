@@ -21,6 +21,7 @@ urlpatterns = [
         auth_views.LogoutView.as_view(next_page='expenses:login'),
         name='logout',
     ),
+    path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
     path('transaction/add/', views.add_transaction, name='add_transaction'),
