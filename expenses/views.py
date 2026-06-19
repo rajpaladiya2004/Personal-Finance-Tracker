@@ -53,6 +53,7 @@ def profile(request):
             form.save()
             messages.success(request, 'Profile updated successfully.')
             return redirect('expenses:profile')
+        messages.error(request, 'Please correct the profile errors below.')
     else:
         form = UserProfileForm(instance=profile)
 
@@ -115,6 +116,8 @@ def transaction_list(request):
 
 @login_required
 def dashboard(request):
+    profile, created = UserProfile.objects.get_or_create(user=request.user)
+
     total_income = Transaction.objects.filter(
         transaction_type='income'
     ).aggregate(Sum('amount'))['amount__sum'] or 0
@@ -144,6 +147,7 @@ def dashboard(request):
     ).order_by('-year')
 
     context = {
+        'profile': profile,
         'total_income': total_income,
         'total_expenses': total_expenses,
         'balance': balance,

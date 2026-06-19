@@ -13,6 +13,7 @@ class DashboardRecentTransactionsTests(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(
             username='student',
+            email='student@example.com',
             password='testpass123',
         )
 
@@ -38,6 +39,18 @@ class DashboardRecentTransactionsTests(TestCase):
         self.assertEqual(recent_transactions[-1].title, 'Transaction 2')
         self.assertContains(response, 'Transaction 6')
         self.assertNotContains(response, 'Transaction 1')
+
+    def test_dashboard_shows_profile_info_section(self):
+        UserProfile.objects.create(user=self.user, phone_number='1234567890')
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(reverse('expenses:dashboard'))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'Profile Info')
+        self.assertContains(response, 'Username: student')
+        self.assertContains(response, 'Email: student@example.com')
+        self.assertContains(response, 'Phone: 1234567890')
 
 
 class AuthenticationTests(TestCase):
@@ -155,6 +168,24 @@ class UserProfileViewTests(TestCase):
         self.assertEqual(len(messages), 1)
         self.assertEqual(str(messages[0]), 'Profile updated successfully.')
         self.assertEqual(messages[0].tags, 'success')
+
+    def test_profile_view_shows_error_message_for_empty_phone_number(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.post(
+            reverse('expenses:profile'),
+            {'phone_number': ''},
+        )
+
+        messages = list(get_messages(response.wsgi_request))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(
+            str(messages[0]),
+            'Please correct the profile errors below.',
+        )
+        self.assertEqual(messages[0].tags, 'error')
 
 
 class EditTransactionTests(TestCase):

@@ -21,6 +21,14 @@ urlpatterns = [
         auth_views.LogoutView.as_view(next_page='expenses:login'),
         name='logout',
     ),
+    path(
+        'password/change/',
+        auth_views.PasswordChangeView.as_view(
+            template_name='expenses/change_password.html',
+            success_url='/password/change/done/',
+        ),
+        name='change_password',
+    ),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
