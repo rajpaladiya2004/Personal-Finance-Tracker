@@ -1,5 +1,6 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.views.generic import TemplateView
 from . import views
 
 app_name = 'expenses'
@@ -28,6 +29,13 @@ urlpatterns = [
             success_url='/password/change/done/',
         ),
         name='change_password',
+    ),
+    path(
+        'password/change/done/',
+        TemplateView.as_view(
+            template_name='expenses/change_password_done.html',
+        ),
+        name='change_password_done',
     ),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
