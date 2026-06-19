@@ -37,6 +37,8 @@ urlpatterns = [
         ),
         name='change_password_done',
     ),
+    path('delete-account/', views.delete_account, name='delete_account'),
+    path('delete-account/confirm/', views.delete_account, name='delete_account_confirm'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),

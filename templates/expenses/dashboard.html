@@ -14,6 +14,10 @@
     <h2>Password Settings</h2>
     <p><a href="{% url 'expenses:change_password' %}">Change Password</a></p>
 
+    <h2>Danger Zone</h2>
+    <p>This action is permanent and cannot be undone.</p>
+    <p><a href="{% url 'expenses:delete_account' %}">Delete Account</a></p>
+
     <div class="summary-boxes">
         <div class="summary-box income">
             <h3>Total Income</h3>

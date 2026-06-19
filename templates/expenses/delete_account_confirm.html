@@ -5,7 +5,7 @@
 {% block content %}
     <p>Are you sure you want to delete your account?</p>
 
-    <form method="POST">
+    <form method="POST" action="{% url 'expenses:delete_account_confirm' %}">
         {% csrf_token %}
         <button type="submit">Delete Account</button>
     </form>

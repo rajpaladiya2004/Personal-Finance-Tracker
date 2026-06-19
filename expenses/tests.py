@@ -216,6 +216,15 @@ class DeleteAccountViewTests(TestCase):
         self.assertFalse(UserProfile.objects.filter(user=self.user).exists())
         self.assertFalse(get_user_model().objects.filter(username='student').exists())
 
+    def test_delete_account_routes_render_and_submit(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.get(reverse('expenses:delete_account'))
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post(reverse('expenses:delete_account_confirm'))
+        self.assertRedirects(response, reverse('expenses:login'))
+
 
 class EditTransactionTests(TestCase):
     def setUp(self):
