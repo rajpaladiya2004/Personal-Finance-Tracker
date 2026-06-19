@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
@@ -58,6 +59,18 @@ def profile(request):
         form = UserProfileForm(instance=profile)
 
     return render(request, 'expenses/profile.html', {'form': form, 'profile': profile})
+
+
+@login_required
+def delete_account(request):
+    if request.method == 'POST':
+        user = request.user
+        UserProfile.objects.filter(user=user).delete()
+        user.delete()
+        logout(request)
+        return redirect('expenses:login')
+
+    return render(request, 'expenses/delete_account_confirm.html')
 
 
 @login_required

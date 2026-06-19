@@ -1,12 +1,16 @@
 from datetime import date, timedelta
 
+from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.contrib.messages import get_messages
+from django.contrib.sessions.middleware import SessionMiddleware
+from django.test import RequestFactory
 from django.test import TestCase
 from django.urls import resolve
 from django.urls import reverse
 
 from .models import Transaction, UserProfile
+from .views import delete_account
 
 
 class DashboardRecentTransactionsTests(TestCase):
@@ -186,6 +190,31 @@ class UserProfileViewTests(TestCase):
             'Please correct the profile errors below.',
         )
         self.assertEqual(messages[0].tags, 'error')
+
+
+class DeleteAccountViewTests(TestCase):
+    def setUp(self):
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='student',
+            password='testpass123',
+        )
+        UserProfile.objects.create(user=self.user, phone_number='1234567890')
+
+    def test_delete_account_removes_profile_and_user_then_redirects(self):
+        request = self.factory.post('/delete-account/')
+        request.user = self.user
+
+        session_middleware = SessionMiddleware(lambda req: None)
+        session_middleware.process_request(request)
+        request.session.save()
+
+        response = delete_account(request)
+
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response.url, reverse('expenses:login'))
+        self.assertFalse(UserProfile.objects.filter(user=self.user).exists())
+        self.assertFalse(get_user_model().objects.filter(username='student').exists())
 
 
 class EditTransactionTests(TestCase):

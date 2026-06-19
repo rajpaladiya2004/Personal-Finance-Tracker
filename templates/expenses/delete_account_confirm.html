@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Account - Personal Finance Tracker{% endblock %}
+
+{% block content %}
+    <p>Are you sure you want to delete your account?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Delete Account</button>
+    </form>
+
+    <a href="{% url 'expenses:dashboard' %}">Cancel</a>
+{% endblock %}
