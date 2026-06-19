@@ -74,6 +74,11 @@ def delete_account(request):
 
 
 @login_required
+def order_history(request):
+    return render(request, 'expenses/order_history.html')
+
+
+@login_required
 def category_list(request):
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
@@ -170,3 +175,4 @@ def dashboard(request):
         'yearly_expenses': yearly_expenses,
     }
     return render(request, 'expenses/dashboard.html', context)
+
