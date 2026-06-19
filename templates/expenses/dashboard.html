@@ -11,6 +11,9 @@
     <p>Email: {{ user.email }}</p>
     <p>Phone: {{ profile.phone_number }}</p>
 
+    <h2>Password Settings</h2>
+    <p><a href="{% url 'expenses:change_password' %}">Change Password</a></p>
+
     <div class="summary-boxes">
         <div class="summary-box income">
             <h3>Total Income</h3>

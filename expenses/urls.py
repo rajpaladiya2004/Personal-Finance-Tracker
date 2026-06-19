@@ -23,15 +23,15 @@ urlpatterns = [
         name='logout',
     ),
     path(
-        'password/change/',
+        'change-password/',
         auth_views.PasswordChangeView.as_view(
             template_name='expenses/change_password.html',
-            success_url='/password/change/done/',
+            success_url='/change-password/success/',
         ),
         name='change_password',
     ),
     path(
-        'password/change/done/',
+        'change-password/success/',
         TemplateView.as_view(
             template_name='expenses/change_password_done.html',
         ),
