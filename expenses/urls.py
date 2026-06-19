@@ -40,6 +40,7 @@ urlpatterns = [
     path('delete-account/', views.delete_account, name='delete_account'),
     path('delete-account/confirm/', views.delete_account, name='delete_account_confirm'),
     path('order-history/', views.order_history, name='order_history'),
+    path('wishlist/', views.wishlist, name='wishlist'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
@@ -50,4 +51,5 @@ urlpatterns = [
     path('transaction/', views.transaction_list, name='transaction_list'),
     path('dashboard/', views.dashboard, name='dashboard'),
 ]
+
 
