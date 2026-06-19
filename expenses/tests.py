@@ -141,6 +141,21 @@ class UserProfileViewTests(TestCase):
         self.assertRedirects(response, reverse('expenses:profile'))
         self.assertEqual(profile.phone_number, '1234567890')
 
+    def test_profile_view_shows_success_message_after_update(self):
+        self.client.login(username='student', password='testpass123')
+
+        response = self.client.post(
+            reverse('expenses:profile'),
+            {'phone_number': '1234567890'},
+        )
+
+        messages = list(get_messages(response.wsgi_request))
+
+        self.assertRedirects(response, reverse('expenses:profile'))
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(str(messages[0]), 'Profile updated successfully.')
+        self.assertEqual(messages[0].tags, 'success')
+
 
 class EditTransactionTests(TestCase):
     def setUp(self):
