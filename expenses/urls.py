@@ -42,6 +42,7 @@ urlpatterns = [
     path('order-history/', views.order_history, name='order_history'),
     path('wishlist/', views.wishlist, name='wishlist'),
     path('profile-settings/', views.profile_settings, name='profile_settings'),
+    path('notifications/', views.notifications, name='notifications'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
@@ -52,6 +53,7 @@ urlpatterns = [
     path('transaction/', views.transaction_list, name='transaction_list'),
     path('dashboard/', views.dashboard, name='dashboard'),
 ]
+
 
 
 

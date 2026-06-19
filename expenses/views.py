@@ -89,6 +89,11 @@ def profile_settings(request):
 
 
 @login_required
+def notifications(request):
+    return render(request, 'expenses/notifications.html')
+
+
+@login_required
 def category_list(request):
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
@@ -185,6 +190,7 @@ def dashboard(request):
         'yearly_expenses': yearly_expenses,
     }
     return render(request, 'expenses/dashboard.html', context)
+
 
 
 
