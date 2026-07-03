@@ -94,6 +94,11 @@ def notifications(request):
 
 
 @login_required
+def help_support(request):
+    return render(request, 'help_support.html')
+
+
+@login_required
 def category_list(request):
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
