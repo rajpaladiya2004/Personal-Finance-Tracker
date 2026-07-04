@@ -44,6 +44,7 @@ urlpatterns = [
     path('profile-settings/', views.profile_settings, name='profile_settings'),
     path('notifications/', views.notifications, name='notifications'),
     path('help-support/', views.help_support, name='help_support'),
+    path('terms-conditions/', views.terms_conditions, name='terms_conditions'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
