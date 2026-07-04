@@ -15,39 +15,10 @@
 
     <section class="dashboard-grid">
         <div class="dashboard-card">
-            <h2>Profile Info</h2>
-            <p><strong>Username:</strong> {{ user.username }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not added yet" }}</p>
-        </div>
-
-        <div class="dashboard-card">
-            <h2>Account Actions</h2>
-            <div class="link-stack">
-                <a href="{% url 'expenses:change_password' %}">Change Password</a>
-                <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a>
-                <a href="{% url 'expenses:delete_account' %}">Delete Account</a>
-            </div>
-        </div>
-
-        <div class="dashboard-card">
             <h2>Updates</h2>
             <div class="link-stack">
-                <a href="/notifications/">Notifications</a>
                 <a href="/help-support/">Help &amp; Support</a>
                 <a href="{% url 'expenses:faq' %}">FAQ</a>
-            </div>
-        </div>
-
-        <div class="dashboard-card">
-            <h2>About This App</h2>
-            <div class="link-stack">
-                <a href="/terms-conditions/">Terms &amp; Conditions</a>
-                <a href="/privacy-policy/">Privacy Policy</a>
-                <a href="{% url 'expenses:about_us' %}">About Us</a>
-                <a href="{% url 'expenses:contact_us' %}">Contact Us</a>
-                <a href="/refund-policy/">Refund Policy</a>
-                <a href="/shipping-policy/">Shipping Policy</a>
             </div>
         </div>
     </section>

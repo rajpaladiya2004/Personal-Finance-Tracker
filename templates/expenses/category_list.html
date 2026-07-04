@@ -5,7 +5,9 @@
 {% block content %}
     <h1>All Categories</h1>
 
-    <a href="{% url 'expenses:add_category' %}">+ Add New Category</a>
+    <div class="page-actions">
+        <a class="button-link" href="{% url 'expenses:add_category' %}">+ Add New Category</a>
+    </div>
 
     {% if categories %}
         <table border="1">
@@ -28,5 +30,5 @@
         <p>No categories found. <a href="{% url 'expenses:add_category' %}">Add one now.</a></p>
     {% endif %}
 
-    <p><a href="{% url 'expenses:home' %}">Back to Home</a></p>
+    <p><a class="back-link" href="{% url 'expenses:home' %}">Back to Home</a></p>
 {% endblock %}

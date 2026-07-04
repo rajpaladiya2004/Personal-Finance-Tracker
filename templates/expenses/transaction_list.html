@@ -33,17 +33,17 @@
                     <td>{{ transaction.category }}</td>
                     <td>{{ transaction.description }}</td>
                     <td>{{ transaction.date }}</td>
-                    <td>
-                        <a href="{% url 'expenses:edit_transaction' transaction.id %}">Edit</a>
-                        <a href="{% url 'expenses:delete_transaction' transaction.id %}">Delete</a>
+                    <td class="table-actions">
+                        <a class="table-link table-link-edit" href="{% url 'expenses:edit_transaction' transaction.id %}">Edit</a>
+                        <a class="table-link table-link-delete" href="{% url 'expenses:delete_transaction' transaction.id %}">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     {% else %}
-        <p>No transactions yet. <a href="{% url 'expenses:add_transaction' %}">Add one now.</a></p>
+        <p>No transactions yet. <a class="inline-link" href="{% url 'expenses:add_transaction' %}">Add one now.</a></p>
     {% endif %}
 
-    <p><a href="{% url 'expenses:home' %}">Back to Home</a></p>
+    <p><a class="back-link" href="{% url 'expenses:home' %}">Back to Home</a></p>
 {% endblock %}
