@@ -46,6 +46,7 @@ urlpatterns = [
     path('help-support/', views.help_support, name='help_support'),
     path('terms-conditions/', views.terms_conditions, name='terms_conditions'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
+    path('about-us/', views.about_us, name='about_us'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),
