@@ -47,6 +47,7 @@ urlpatterns = [
     path('terms-conditions/', views.terms_conditions, name='terms_conditions'),
     path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
     path('about-us/', views.about_us, name='about_us'),
+    path('contact-us/', views.contact_us, name='contact_us'),
     path('profile/', views.profile, name='profile'),
     path('category/add/', views.add_category, name='add_category'),
     path('category/', views.category_list, name='category_list'),

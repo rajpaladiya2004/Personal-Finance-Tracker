@@ -114,6 +114,11 @@ def about_us(request):
 
 
 @login_required
+def contact_us(request):
+    return render(request, 'expenses/contact_us.html')
+
+
+@login_required
 def category_list(request):
     categories = Category.objects.all().order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
