@@ -95,7 +95,7 @@ def notifications(request):
 
 @login_required
 def help_support(request):
-    return render(request, 'help_support.html')
+    return render(request, 'expenses/help_support.html')
 
 
 @login_required

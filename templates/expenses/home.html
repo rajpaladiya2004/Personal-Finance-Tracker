@@ -3,14 +3,28 @@
 {% block title %}Home - Personal Finance Tracker{% endblock %}
 
 {% block content %}
-    <h1>Welcome to Personal Finance Tracker</h1>
-    <p>Track your income and expenses easily.</p>
+    <section class="hero">
+        <p class="eyebrow">Personal Finance Tracker</p>
+        <h1>Stay on top of your money.</h1>
+        <p>Track income, expenses, and account details in one clean place.</p>
+
+        <div class="page-actions">
+            {% if request.user.is_authenticated %}
+                <a class="button-link" href="{% url 'expenses:dashboard' %}">Go to Dashboard</a>
+                <a class="button-link alt" href="{% url 'expenses:add_transaction' %}">Add Transaction</a>
+            {% else %}
+                <a class="button-link" href="{% url 'expenses:login' %}">Login</a>
+                <a class="button-link alt" href="{% url 'expenses:register' %}">Create Account</a>
+            {% endif %}
+        </div>
+    </section>
 
     {% if request.user.is_authenticated %}
-        <a href="{% url 'expenses:dashboard' %}">Dashboard</a> |
-        <a href="{% url 'expenses:add_category' %}">Add Category</a> |
-        <a href="{% url 'expenses:category_list' %}">View Categories</a> |
-        <a href="{% url 'expenses:add_transaction' %}">Add Transaction</a> |
-        <a href="{% url 'expenses:transaction_list' %}">View Transactions</a>
+        <h2>Quick Links</h2>
+        <div class="page-actions">
+            <a href="{% url 'expenses:add_category' %}">Add Category</a>
+            <a href="{% url 'expenses:category_list' %}">View Categories</a>
+            <a href="{% url 'expenses:transaction_list' %}">View Transactions</a>
+        </div>
     {% endif %}
 {% endblock %}

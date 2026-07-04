@@ -8,35 +8,40 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <nav>
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'expenses:dashboard' %}">Dashboard</a> |
-            <a href="{% url 'expenses:transaction_list' %}">Transactions</a> |
-            <a href="{% url 'expenses:category_list' %}">Categories</a> |
-            <a href="{% url 'expenses:add_transaction' %}">Add Transaction</a> |
-            <a href="{% url 'expenses:profile' %}">Profile</a> |
-            <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a> |
-            <a href="{% url 'expenses:wishlist' %}">Wishlist</a> |
-            <a href="{% url 'expenses:order_history' %}">Order History</a> |
-            <a href="{% url 'expenses:notifications' %}">Notifications</a> |
-            <a href="{% url 'expenses:help_support' %}">Help &amp; Support</a> |
-            <a href="{% url 'expenses:terms_conditions' %}">Terms &amp; Conditions</a> |
-            <a href="/privacy-policy/">Privacy Policy</a> |
-            <a href="{% url 'expenses:about_us' %}">About Us</a> |
-            <a href="{% url 'expenses:contact_us' %}">Contact Us</a> |
-            <a href="{% url 'expenses:faq' %}">FAQ</a> |
-            <a href="/refund-policy/">Refund Policy</a> |
-            <a href="/shipping-policy/">Shipping Policy</a> |
-            <a href="{% url 'expenses:change_password' %}">Change Password</a> |
-            <a href="{% url 'expenses:delete_account' %}">Delete Account</a> |
-            <span>Hello, {{ request.user.username }}</span> |
-            <a href="{% url 'expenses:logout' %}">Logout</a>
-        {% else %}
-            <a href="{% url 'expenses:login' %}">Login</a>
-        {% endif %}
-    </nav>
+    <header class="site-header">
+        <nav class="site-nav">
+            <a class="brand" href="{% url 'expenses:home' %}">Personal Finance Tracker</a>
+            <div class="nav-links">
+                {% if request.user.is_authenticated %}
+                    <a href="{% url 'expenses:dashboard' %}">Dashboard</a>
+                    <a href="{% url 'expenses:transaction_list' %}">Transactions</a>
+                    <a href="{% url 'expenses:category_list' %}">Categories</a>
+                    <a href="{% url 'expenses:add_transaction' %}">Add Transaction</a>
+                    <a href="{% url 'expenses:profile' %}">Profile</a>
+                    <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a>
+                    <a href="{% url 'expenses:wishlist' %}">Wishlist</a>
+                    <a href="{% url 'expenses:order_history' %}">Order History</a>
+                    <a href="{% url 'expenses:notifications' %}">Notifications</a>
+                    <a href="{% url 'expenses:help_support' %}">Help &amp; Support</a>
+                    <a href="{% url 'expenses:terms_conditions' %}">Terms &amp; Conditions</a>
+                    <a href="/privacy-policy/">Privacy Policy</a>
+                    <a href="{% url 'expenses:about_us' %}">About Us</a>
+                    <a href="{% url 'expenses:contact_us' %}">Contact Us</a>
+                    <a href="{% url 'expenses:faq' %}">FAQ</a>
+                    <a href="/refund-policy/">Refund Policy</a>
+                    <a href="/shipping-policy/">Shipping Policy</a>
+                    <a href="{% url 'expenses:change_password' %}">Change Password</a>
+                    <a href="{% url 'expenses:delete_account' %}">Delete Account</a>
+                    <span>Hello, {{ request.user.username }}</span>
+                    <a href="{% url 'expenses:logout' %}">Logout</a>
+                {% else %}
+                    <a href="{% url 'expenses:login' %}">Login</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
 
-    <div class="container">
+    <main class="container">
         {% if messages %}
             {% for message in messages %}
                 <p class="message {% if message.tags %}message-{{ message.tags }}{% endif %}">{{ message }}</p>
@@ -45,7 +50,7 @@
 
         {% block content %}
         {% endblock %}
-    </div>
+    </main>
 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
