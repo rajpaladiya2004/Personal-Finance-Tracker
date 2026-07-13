@@ -16,6 +16,12 @@
                 <span class="brand-text">Personal Finance Tracker</span>
             </a>
 
+            <button class="nav-toggle" type="button" aria-label="Open menu" aria-controls="mobile-nav" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
             <div class="nav-links">
                 <a class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}" href="{% url 'expenses:dashboard' %}">Home</a>
                 <a class="{% if request.resolver_match.url_name == 'transaction_list' %}active{% endif %}" href="{% url 'expenses:transaction_list' %}">Transactions</a>
@@ -63,6 +69,43 @@
                 </a>
             </div>
         </nav>
+
+        <div class="mobile-nav-backdrop" data-mobile-nav-backdrop></div>
+        <aside class="mobile-nav" id="mobile-nav" aria-hidden="true">
+            <div class="mobile-nav-header">
+                <span>Menu</span>
+                <button class="mobile-nav-close" type="button" aria-label="Close menu" data-mobile-nav-close>×</button>
+            </div>
+
+            <div class="mobile-nav-section">
+                <a href="{% url 'expenses:dashboard' %}">Home</a>
+                <a href="{% url 'expenses:transaction_list' %}">Transactions</a>
+                <a href="{% url 'expenses:category_list' %}">Categories</a>
+                <a href="{% url 'expenses:contact_us' %}">Contact Us</a>
+                <a href="{% url 'expenses:faq' %}">FAQ</a>
+            </div>
+
+            <div class="mobile-nav-section">
+                <p>Account</p>
+                <a href="{% url 'expenses:change_password' %}">Change Password</a>
+                <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a>
+                <a href="{% url 'expenses:delete_account' %}">Delete Account</a>
+            </div>
+
+            <div class="mobile-nav-section">
+                <p>More</p>
+                <a href="/terms-conditions/">Terms &amp; Conditions</a>
+                <a href="/privacy-policy/">Privacy Policy</a>
+                <a href="{% url 'expenses:about_us' %}">About Us</a>
+                <a href="/refund-policy/">Refund Policy</a>
+                <a href="/shipping-policy/">Shipping Policy</a>
+            </div>
+
+            <div class="mobile-nav-section">
+                <a class="mobile-nav-action" href="/notifications/">Notifications</a>
+                <a class="mobile-nav-action danger" href="{% url 'expenses:logout' %}">Logout</a>
+            </div>
+        </aside>
     </header>
 
     <main class="container">
