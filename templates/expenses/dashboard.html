@@ -4,12 +4,16 @@
 
 {% block content %}
     <section class="dashboard-hero">
-        <p class="eyebrow">Dashboard</p>
-        <h1>Welcome back, {{ user.username }}.</h1>
-        <p>Here is your current snapshot, recent activity, and quick access to the pages you use most.</p>
-        <div class="page-actions">
-            <a class="button-link" href="{% url 'expenses:add_transaction' %}">Add Transaction</a>
-            <a class="button-link alt" href="{% url 'expenses:transaction_list' %}">View All Transactions</a>
+        <div class="dashboard-hero-main">
+            <div class="dashboard-hero-copy">
+                <p class="eyebrow">Dashboard</p>
+                <h1>Welcome back, {{ user.username }}.</h1>
+                <p>Here is your current snapshot, recent activity, and quick access to the pages you use most.</p>
+                <div class="page-actions">
+                    <a class="button-link" href="{% url 'expenses:add_transaction' %}">Add Transaction</a>
+                    <a class="button-link alt" href="{% url 'expenses:transaction_list' %}">View All Transactions</a>
+                </div>
+            </div>
         </div>
     </section>
 
