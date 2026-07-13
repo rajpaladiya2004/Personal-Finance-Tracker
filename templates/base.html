@@ -21,6 +21,7 @@
                 <a class="{% if request.resolver_match.url_name == 'transaction_list' %}active{% endif %}" href="{% url 'expenses:transaction_list' %}">Transactions</a>
                 <a class="{% if request.resolver_match.url_name == 'category_list' %}active{% endif %}" href="{% url 'expenses:category_list' %}">Categories</a>
                 <a class="{% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}" href="{% url 'expenses:contact_us' %}">Contact Us</a>
+                <a class="{% if request.resolver_match.url_name == 'faq' %}active{% endif %}" href="{% url 'expenses:faq' %}">FAQ</a>
 
                 <details class="nav-menu">
                     <summary>Account</summary>
@@ -43,6 +44,7 @@
                         <a href="/privacy-policy/">Privacy Policy</a>
                         <a href="{% url 'expenses:about_us' %}">About Us</a>
                         <a href="{% url 'expenses:contact_us' %}">Contact Us</a>
+                        <a href="{% url 'expenses:faq' %}">FAQ</a>
                         <a href="/refund-policy/">Refund Policy</a>
                         <a href="/shipping-policy/">Shipping Policy</a>
                     </div>
