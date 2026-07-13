@@ -3,6 +3,31 @@
 {% block title %}Contact Us - Personal Finance Tracker{% endblock %}
 
 {% block content %}
-    <h2>Contact Us</h2>
-    <p>Contact information will appear here.</p>
+    <section class="contact-page">
+        <div class="contact-intro">
+            <h1>Contact Us</h1>
+            <p>Send us a message using the form below.</p>
+        </div>
+
+        <form method="post" class="contact-form">
+            {% csrf_token %}
+            <p>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+            </p>
+            <p>
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </p>
+            <p>
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+            </p>
+            <p>
+                <label for="message">Message</label>
+                <textarea id="message" name="message" rows="10" required></textarea>
+            </p>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
 {% endblock %}

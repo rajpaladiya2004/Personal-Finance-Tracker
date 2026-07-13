@@ -502,6 +502,28 @@ button {
     font-size: 1.05rem;
 }
 
+.contact-page {
+    display: block;
+    width: 100%;
+}
+
+.contact-form {
+    width: 100%;
+    max-width: none;
+}
+
+.contact-intro {
+    margin-bottom: 18px;
+}
+
+.contact-intro h1 {
+    margin-bottom: 10px;
+}
+
+.contact-intro p {
+    max-width: 720px;
+}
+
 .page-actions {
     display: flex;
     flex-wrap: wrap;
