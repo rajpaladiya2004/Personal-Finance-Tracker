@@ -39,3 +39,16 @@ class Transaction(models.Model):
 
     class Meta:
         ordering = ['-date']
+
+
+class Notification(models.Model):
+    title = models.CharField(max_length=200)
+    message = models.CharField(max_length=255)
+    transaction = models.ForeignKey(Transaction, on_delete=models.CASCADE, related_name='notifications', null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created_at']

@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
 from .forms import CategoryForm, RegisterForm, TransactionForm, UserProfileForm
-from .models import Category, Transaction, UserProfile
+from .models import Category, Notification, Transaction, UserProfile
 
 
 def home(request):
@@ -90,7 +90,8 @@ def profile_settings(request):
 
 @login_required
 def notifications(request):
-    return render(request, 'expenses/notifications.html')
+    notifications = Notification.objects.all().order_by('-created_at')
+    return render(request, 'expenses/notifications.html', {'notifications': notifications})
 
 
 @login_required
@@ -144,7 +145,13 @@ def add_transaction(request):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         if form.is_valid():
-            form.save()
+            transaction = form.save()
+            transaction_label = 'Income' if transaction.transaction_type == 'income' else 'Expense'
+            Notification.objects.create(
+                title=f'New {transaction_label.lower()} added',
+                message=f'{transaction_label}: {transaction.title} - {transaction.amount}',
+                transaction=transaction,
+            )
             messages.success(request, 'Transaction added successfully.')
             return redirect('expenses:transaction_list')
     else:

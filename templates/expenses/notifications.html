@@ -3,6 +3,25 @@
 {% block title %}Notifications - Personal Finance Tracker{% endblock %}
 
 {% block content %}
-    <h2>Notifications</h2>
-    <p>Your notifications will appear here.</p>
+    <section class="info-page">
+        <div class="info-hero">
+            <h1>Notifications</h1>
+            <p>Recent income and expense activity appears here with date and time.</p>
+        </div>
+
+        {% if notifications %}
+            {% for notification in notifications %}
+                <div class="info-card">
+                    <h2>{{ notification.title }}</h2>
+                    <p>{{ notification.message }}</p>
+                    <p><strong>Date:</strong> {{ notification.created_at|date:"M d, Y" }}</p>
+                    <p><strong>Time:</strong> {{ notification.created_at|date:"h:i A" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="info-card">
+                <p>Your notifications will appear here.</p>
+            </div>
+        {% endif %}
+    </section>
 {% endblock %}

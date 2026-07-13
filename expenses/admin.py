@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Transaction
+from .models import Category, Notification, Transaction
 
 
 @admin.register(Category)
@@ -27,3 +27,11 @@ class TransactionAdmin(admin.ModelAdmin):
             'fields': ('created_at',)
         }),
     )
+
+
+@admin.register(Notification)
+class NotificationAdmin(admin.ModelAdmin):
+    list_display = ('title', 'message', 'created_at')
+    search_fields = ('title', 'message')
+    ordering = ('-created_at',)
+    readonly_fields = ('created_at',)
