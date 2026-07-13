@@ -9,6 +9,18 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ['name']
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        category = super().save(commit=False)
+        if self.user is not None:
+            category.user = self.user
+        if commit:
+            category.save()
+        return category
+
 
 class TransactionForm(forms.ModelForm):
     class Meta:
@@ -18,6 +30,23 @@ class TransactionForm(forms.ModelForm):
             'date': forms.DateInput(attrs={'type': 'date'}),
             'description': forms.Textarea(attrs={'rows': 3}),
         }
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+        self.fields['category'].required = True
+        if self.user is not None:
+            self.fields['category'].queryset = Category.objects.filter(user=self.user).order_by('name')
+        else:
+            self.fields['category'].queryset = Category.objects.none()
+
+    def save(self, commit=True):
+        transaction = super().save(commit=False)
+        if self.user is not None:
+            transaction.user = self.user
+        if commit:
+            transaction.save()
+        return transaction
 
 
 class RegisterForm(UserCreationForm):

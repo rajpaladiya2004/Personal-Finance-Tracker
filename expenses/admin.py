@@ -4,21 +4,21 @@ from .models import Category, Notification, Transaction
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-    search_fields = ('name',)
+    list_display = ('name', 'user')
+    search_fields = ('name', 'user__username')
     ordering = ('name',)
 
 
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
-    list_display = ('title', 'amount', 'transaction_type', 'category', 'date', 'created_at')
+    list_display = ('title', 'amount', 'transaction_type', 'category', 'user', 'date', 'created_at')
     list_filter = ('transaction_type', 'category', 'date')
-    search_fields = ('title', 'description')
+    search_fields = ('title', 'description', 'user__username')
     ordering = ('-date',)
     readonly_fields = ('created_at',)
     fieldsets = (
         ('Basic Info', {
-            'fields': ('title', 'amount', 'transaction_type', 'category')
+            'fields': ('title', 'amount', 'transaction_type', 'category', 'user')
         }),
         ('Details', {
             'fields': ('description', 'date')
@@ -31,7 +31,7 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(Notification)
 class NotificationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'message', 'created_at')
-    search_fields = ('title', 'message')
+    list_display = ('title', 'message', 'user', 'created_at')
+    search_fields = ('title', 'message', 'user__username')
     ordering = ('-created_at',)
     readonly_fields = ('created_at',)

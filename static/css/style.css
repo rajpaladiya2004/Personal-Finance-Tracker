@@ -124,12 +124,31 @@ a:hover {
     background: #f5f7fb;
     border: 1px solid rgba(32, 56, 74, 0.10);
     color: #20384a;
+    flex: 0 0 auto;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease;
 }
 
 .nav-icon svg {
     width: 22px;
     height: 22px;
     fill: currentColor;
+}
+
+.nav-icon:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 18px rgba(32, 56, 74, 0.08);
+}
+
+.nav-icon-logout {
+    background: #fff;
+    border-color: rgba(180, 35, 24, 0.16);
+    color: #b42318;
+}
+
+.nav-icon-logout:hover {
+    background: #fff5f4;
+    color: #8f1d16;
+    border-color: rgba(180, 35, 24, 0.22);
 }
 
 .nav-menu {
@@ -197,32 +216,6 @@ a:hover {
     background: #f5f7fb;
 }
 
-.support-fab {
-    position: fixed;
-    right: 28px;
-    bottom: 28px;
-    z-index: 40;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 136px;
-    min-height: 72px;
-    padding: 0 26px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, #0f172d 0%, #111a33 100%);
-    color: #fff;
-    font-size: 1.18rem;
-    font-weight: 700;
-    box-shadow: 0 18px 36px rgba(15, 23, 45, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.support-fab:hover {
-    color: #fff;
-    transform: translateY(-2px);
-    box-shadow: 0 22px 40px rgba(15, 23, 45, 0.26);
-}
-
 .nav-links a:hover {
     color: #111;
 }
@@ -280,46 +273,6 @@ p {
 
 .dashboard-hero p {
     max-width: 760px;
-}
-
-.dashboard-hero-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 18px;
-}
-
-.dashboard-actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    flex: 0 0 auto;
-}
-
-.icon-action {
-    width: 52px;
-    height: 52px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 16px;
-    background: #fff;
-    border: 1px solid var(--line);
-    color: var(--primary);
-    box-shadow: 0 8px 18px rgba(32, 56, 74, 0.06);
-}
-
-.icon-action svg {
-    width: 22px;
-    height: 22px;
-    fill: currentColor;
-}
-
-.icon-action:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 12px 22px rgba(32, 56, 74, 0.10);
-    color: var(--primary-light);
 }
 
 .dashboard-hero .eyebrow {
@@ -461,6 +414,50 @@ button {
     cursor: pointer;
 }
 
+.login-page {
+    min-height: calc(100vh - 220px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
+}
+
+.login-card {
+    width: min(560px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+.login-form {
+    width: 100%;
+    max-width: none;
+}
+
+.login-footer {
+    margin-top: 16px;
+}
+
+.register-page {
+    min-height: calc(100vh - 220px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px 0;
+}
+
+.register-card {
+    width: min(560px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+.register-form {
+    width: 100%;
+    max-width: none;
+}
+
+.register-footer {
+    margin-top: 16px;
+}
+
 .message {
     padding: 12px 14px;
     margin-bottom: 16px;
@@ -576,6 +573,36 @@ button {
     margin-bottom: 0;
 }
 
+.faq-list {
+    display: grid;
+    gap: 12px;
+}
+
+.faq-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 0 18px;
+    box-shadow: 0 10px 24px rgba(32, 56, 74, 0.05);
+}
+
+.faq-item summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 0;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.faq-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item p {
+    padding: 0 0 18px;
+    margin: 0;
+}
+
 .notification-row {
     display: flex;
     align-items: center;
@@ -631,6 +658,7 @@ button {
     flex-wrap: wrap;
     gap: 12px;
     margin: 16px 0 8px;
+    justify-content: flex-end;
 }
 
 .page-actions a {
@@ -824,14 +852,5 @@ hr {
 
     .dashboard-card {
         padding: 18px;
-    }
-
-    .support-fab {
-        right: 16px;
-        bottom: 16px;
-        min-width: 112px;
-        min-height: 60px;
-        padding: 0 20px;
-        font-size: 1rem;
     }
 }

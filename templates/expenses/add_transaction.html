@@ -5,47 +5,57 @@
 {% block content %}
     <h1>Add Transaction</h1>
 
-    <form method="POST">
-        {% csrf_token %}
+    {% if needs_category %}
+        <div class="info-card">
+            <p>You need to add at least one category before creating a transaction.</p>
+            <div class="page-actions">
+                <a class="button-link" href="{% url 'expenses:add_category' %}">Add Category</a>
+                <a class="button-link alt" href="{% url 'expenses:category_list' %}">View Categories</a>
+            </div>
+        </div>
+    {% else %}
+        <form method="POST">
+            {% csrf_token %}
 
-        <p>
-            <label for="{{ form.title.id_for_label }}">Title:</label>
-            {{ form.title }}
-            {{ form.title.errors }}
-        </p>
+            <p>
+                <label for="{{ form.title.id_for_label }}">Title:</label>
+                {{ form.title }}
+                {{ form.title.errors }}
+            </p>
 
-        <p>
-            <label for="{{ form.amount.id_for_label }}">Amount:</label>
-            {{ form.amount }}
-            {{ form.amount.errors }}
-        </p>
+            <p>
+                <label for="{{ form.amount.id_for_label }}">Amount:</label>
+                {{ form.amount }}
+                {{ form.amount.errors }}
+            </p>
 
-        <p>
-            <label for="{{ form.transaction_type.id_for_label }}">Type:</label>
-            {{ form.transaction_type }}
-            {{ form.transaction_type.errors }}
-        </p>
+            <p>
+                <label for="{{ form.transaction_type.id_for_label }}">Type:</label>
+                {{ form.transaction_type }}
+                {{ form.transaction_type.errors }}
+            </p>
 
-        <p>
-            <label for="{{ form.category.id_for_label }}">Category:</label>
-            {{ form.category }}
-            {{ form.category.errors }}
-        </p>
+            <p>
+                <label for="{{ form.category.id_for_label }}">Category:</label>
+                {{ form.category }}
+                {{ form.category.errors }}
+            </p>
 
-        <p>
-            <label for="{{ form.description.id_for_label }}">Description:</label>
-            {{ form.description }}
-            {{ form.description.errors }}
-        </p>
+            <p>
+                <label for="{{ form.description.id_for_label }}">Description:</label>
+                {{ form.description }}
+                {{ form.description.errors }}
+            </p>
 
-        <p>
-            <label for="{{ form.date.id_for_label }}">Date:</label>
-            {{ form.date }}
-            {{ form.date.errors }}
-        </p>
+            <p>
+                <label for="{{ form.date.id_for_label }}">Date:</label>
+                {{ form.date }}
+                {{ form.date.errors }}
+            </p>
 
-        <button type="submit">Save Transaction</button>
-    </form>
+            <button type="submit">Save Transaction</button>
+        </form>
+    {% endif %}
 
     <p><a class="back-link" href="{% url 'expenses:home' %}">Back to Home</a></p>
 {% endblock %}

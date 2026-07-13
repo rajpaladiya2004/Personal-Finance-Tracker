@@ -3,37 +3,41 @@
 {% block title %}Register - Personal Finance Tracker{% endblock %}
 
 {% block content %}
-    <h1>Create an Account</h1>
+    <section class="register-page">
+        <div class="register-card">
+            <h1>Create an Account</h1>
 
-    <form method="POST">
-        {% csrf_token %}
+            <form method="POST" class="register-form">
+                {% csrf_token %}
 
-        <p>
-            <label for="{{ form.username.id_for_label }}">Username:</label>
-            {{ form.username }}
-            {{ form.username.errors }}
-        </p>
+                <p>
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                </p>
 
-        <p>
-            <label for="{{ form.email.id_for_label }}">Email:</label>
-            {{ form.email }}
-            {{ form.email.errors }}
-        </p>
+                <p>
+                    <label for="{{ form.email.id_for_label }}">Email:</label>
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                </p>
 
-        <p>
-            <label for="{{ form.password1.id_for_label }}">Password:</label>
-            {{ form.password1 }}
-            {{ form.password1.errors }}
-        </p>
+                <p>
+                    <label for="{{ form.password1.id_for_label }}">Password:</label>
+                    {{ form.password1 }}
+                    {{ form.password1.errors }}
+                </p>
 
-        <p>
-            <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
-            {{ form.password2 }}
-            {{ form.password2.errors }}
-        </p>
+                <p>
+                    <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </p>
 
-        <button type="submit">Register</button>
-    </form>
+                <button type="submit">Register</button>
+            </form>
 
-    <p>Already have an account? <a href="{% url 'expenses:login' %}">Login here</a></p>
+            <p class="register-footer">Already have an account? <a href="{% url 'expenses:login' %}">Login here</a></p>
+        </div>
+    </section>
 {% endblock %}

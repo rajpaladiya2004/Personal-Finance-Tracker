@@ -33,14 +33,19 @@ def register(request):
 @login_required
 def add_category(request):
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
+        form = CategoryForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
+            category = form.save()
+            Notification.objects.create(
+                user=request.user,
+                title='New category added',
+                message=f'Category: {category.name}',
+            )
             messages.success(request, 'Category added successfully.')
             return redirect('expenses:add_category')
     else:
-        form = CategoryForm()
-    categories = Category.objects.all().order_by('name')
+        form = CategoryForm(user=request.user)
+    categories = Category.objects.filter(user=request.user).order_by('name')
     return render(request, 'expenses/add_category.html', {'form': form, 'categories': categories})
 
 
@@ -90,7 +95,7 @@ def profile_settings(request):
 
 @login_required
 def notifications(request):
-    notifications = Notification.objects.all().order_by('-created_at')
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
     return render(request, 'expenses/notifications.html', {'notifications': notifications})
 
 
@@ -136,18 +141,32 @@ def shipping_policy(request):
 
 @login_required
 def category_list(request):
-    categories = Category.objects.all().order_by('name')
+    categories = Category.objects.filter(user=request.user).order_by('name')
     return render(request, 'expenses/category_list.html', {'categories': categories})
 
 
 @login_required
 def add_transaction(request):
+    categories = Category.objects.filter(user=request.user).order_by('name')
+
+    if not categories.exists():
+        messages.warning(request, 'Please add a category first before creating a transaction.')
+        return render(
+            request,
+            'expenses/add_transaction.html',
+            {
+                'form': None,
+                'needs_category': True,
+            },
+        )
+
     if request.method == 'POST':
-        form = TransactionForm(request.POST)
+        form = TransactionForm(request.POST, user=request.user)
         if form.is_valid():
             transaction = form.save()
             transaction_label = 'Income' if transaction.transaction_type == 'income' else 'Expense'
             Notification.objects.create(
+                user=request.user,
                 title=f'New {transaction_label.lower()} added',
                 message=f'{transaction_label}: {transaction.title} - {transaction.amount}',
                 transaction=transaction,
@@ -155,29 +174,29 @@ def add_transaction(request):
             messages.success(request, 'Transaction added successfully.')
             return redirect('expenses:transaction_list')
     else:
-        form = TransactionForm()
-    return render(request, 'expenses/add_transaction.html', {'form': form})
+        form = TransactionForm(user=request.user)
+    return render(request, 'expenses/add_transaction.html', {'form': form, 'needs_category': False})
 
 
 @login_required
 def edit_transaction(request, transaction_id):
-    transaction = get_object_or_404(Transaction, id=transaction_id)
+    transaction = get_object_or_404(Transaction, id=transaction_id, user=request.user)
 
     if request.method == 'POST':
-        form = TransactionForm(request.POST, instance=transaction)
+        form = TransactionForm(request.POST, instance=transaction, user=request.user)
         if form.is_valid():
             form.save()
             messages.success(request, 'Transaction updated successfully.')
             return redirect('expenses:transaction_list')
     else:
-        form = TransactionForm(instance=transaction)
+        form = TransactionForm(instance=transaction, user=request.user)
 
     return render(request, 'expenses/edit_transaction.html', {'form': form, 'transaction': transaction})
 
 
 @login_required
 def delete_transaction(request, transaction_id):
-    transaction = Transaction.objects.filter(id=transaction_id).first()
+    transaction = Transaction.objects.filter(id=transaction_id, user=request.user).first()
 
     if transaction is None:
         messages.error(request, 'Transaction not found.')
@@ -190,7 +209,7 @@ def delete_transaction(request, transaction_id):
 
 @login_required
 def transaction_list(request):
-    transactions = Transaction.objects.all().order_by('-date')
+    transactions = Transaction.objects.filter(user=request.user).order_by('-date')
     return render(request, 'expenses/transaction_list.html', {'transactions': transactions})
 
 
@@ -199,28 +218,33 @@ def dashboard(request):
     profile, created = UserProfile.objects.get_or_create(user=request.user)
 
     total_income = Transaction.objects.filter(
+        user=request.user,
         transaction_type='income'
     ).aggregate(Sum('amount'))['amount__sum'] or 0
 
     total_expenses = Transaction.objects.filter(
+        user=request.user,
         transaction_type='expense'
     ).aggregate(Sum('amount'))['amount__sum'] or 0
 
     balance = total_income - total_expenses
 
-    recent_transactions = Transaction.objects.all().order_by('-date', '-created_at')[:5]
+    recent_transactions = Transaction.objects.filter(user=request.user).order_by('-date', '-created_at')[:5]
 
     category_expenses = Transaction.objects.filter(
+        user=request.user,
         transaction_type='expense'
     ).values('category__name').annotate(total=Sum('amount')).order_by('-total')
 
     monthly_expenses = Transaction.objects.filter(
+        user=request.user,
         transaction_type='expense'
     ).annotate(month=TruncMonth('date')).values('month').annotate(
         total=Sum('amount')
     ).order_by('-month')
 
     yearly_expenses = Transaction.objects.filter(
+        user=request.user,
         transaction_type='expense'
     ).annotate(year=TruncYear('date')).values('year').annotate(
         total=Sum('amount')
