@@ -401,6 +401,7 @@ p {
 
 table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse;
     margin: 14px 0 24px;
     background: #fff;
@@ -419,6 +420,7 @@ table td {
     text-align: left;
     border-bottom: 1px solid var(--line);
     vertical-align: top;
+    word-break: break-word;
 }
 
 table tr:last-child td {
@@ -851,7 +853,7 @@ hr {
     margin: 24px 0;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .container {
         padding: 20px;
     }
@@ -897,7 +899,7 @@ hr {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .site-nav {
         width: min(100%, calc(100% - 20px));
         justify-content: space-between;
@@ -924,26 +926,32 @@ hr {
         inset: 0;
         z-index: 39;
         display: block;
-        background: rgba(13, 19, 35, 0.38);
+        background: rgba(13, 19, 35, 0.10);
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.18s ease;
+        backdrop-filter: blur(1px);
     }
 
     .mobile-nav {
         position: fixed;
         top: 0;
         right: 0;
-        z-index: 40;
+        bottom: 0;
+        z-index: 60;
         display: block;
-        width: min(340px, 88vw);
+        width: min(320px, calc(100vw - 24px));
         height: 100vh;
-        padding: 18px;
+        max-height: 100vh;
+        padding: 18px 14px;
         background: #fff;
-        box-shadow: -18px 0 38px rgba(15, 23, 45, 0.16);
+        border-left: 1px solid rgba(223, 229, 234, 0.95);
+        border-radius: 22px 0 0 22px;
+        box-shadow: -18px 0 32px rgba(15, 23, 45, 0.14);
         transform: translateX(100%);
         transition: transform 0.22s ease;
         overflow-y: auto;
+        overflow-x: hidden;
     }
 
     .mobile-nav-header {
@@ -951,56 +959,62 @@ hr {
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        padding-bottom: 14px;
-        margin-bottom: 14px;
+        padding: 6px 4px 14px;
+        margin-bottom: 10px;
         border-bottom: 1px solid rgba(223, 229, 234, 0.9);
         color: var(--primary);
-        font-size: 1.05rem;
+        font-size: 0.95rem;
         font-weight: 700;
     }
 
     .mobile-nav-close {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
         border: 1px solid rgba(32, 56, 74, 0.10);
-        border-radius: 12px;
+        border-radius: 10px;
         background: #fff;
         color: var(--primary);
-        font-size: 1.5rem;
+        font-size: 1.35rem;
         line-height: 1;
         cursor: pointer;
     }
 
     .mobile-nav-section {
         display: grid;
-        gap: 8px;
-        padding: 12px 0 16px;
-        border-bottom: 1px solid rgba(223, 229, 234, 0.7);
+        gap: 6px;
+        padding: 10px 4px 16px;
+        border-bottom: 1px solid rgba(223, 229, 234, 0.55);
     }
 
     .mobile-nav-section p {
-        margin: 0 0 4px;
+        margin: 0 0 2px;
         color: var(--muted);
-        font-size: 0.8rem;
+        font-size: 0.74rem;
         font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 0.04em;
+        letter-spacing: 0.08em;
     }
 
     .mobile-nav-section a {
         display: flex;
         align-items: center;
-        min-height: 44px;
-        padding: 10px 12px;
-        border-radius: 12px;
+        min-height: 42px;
+        width: 100%;
+        min-width: 0;
+        padding: 10px 6px;
+        border-radius: 0;
         color: var(--primary);
         font-weight: 700;
-        background: #f8fbff;
-        border: 1px solid rgba(223, 229, 234, 0.9);
+        background: transparent;
+        border: 0;
+        border-bottom: 1px solid rgba(223, 229, 234, 0.55);
+        line-height: 1.35;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .mobile-nav-section a:hover {
-        background: #eef5ff;
+        background: #f7fbff;
     }
 
     .mobile-nav-action {
@@ -1008,13 +1022,13 @@ hr {
     }
 
     .mobile-nav-action.danger {
-        background: #fff5f4;
+        background: transparent;
         border-color: rgba(180, 35, 24, 0.16);
         color: #b42318;
     }
 
     .mobile-nav-action.danger:hover {
-        background: #ffeceb;
+        background: #fff1f0;
     }
 
     .mobile-nav-open {
@@ -1054,6 +1068,23 @@ hr {
     }
 
     table {
-        min-width: 700px;
+        margin: 12px 0 18px;
+        font-size: 0.84rem;
+        table-layout: auto;
+    }
+
+    table th,
+    table td {
+        padding: 10px 8px;
+        white-space: normal;
+        word-break: break-word;
+    }
+
+    .dashboard-card h2 {
+        font-size: 1rem;
+    }
+
+    .summary-box p {
+        font-size: 1.65rem;
     }
 }
