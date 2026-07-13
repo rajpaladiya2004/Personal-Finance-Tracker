@@ -5,11 +5,25 @@
 {% block content %}
     <section class="dashboard-hero">
         <p class="eyebrow">Dashboard</p>
-        <h1>Welcome back, {{ user.username }}.</h1>
-        <p>Here is your current snapshot, recent activity, and quick access to the pages you use most.</p>
-        <div class="page-actions">
-            <a class="button-link" href="{% url 'expenses:add_transaction' %}">Add Transaction</a>
-            <a class="button-link alt" href="{% url 'expenses:transaction_list' %}">View All Transactions</a>
+        <div class="dashboard-hero-head">
+            <div>
+                <h1>Welcome back, {{ user.username }}.</h1>
+                <p>Here is your current snapshot, recent activity, and quick access to the pages you use most.</p>
+            </div>
+            <div class="dashboard-actions">
+                <a class="icon-action" href="{% url 'expenses:add_transaction' %}" aria-label="Add Transaction" title="Add Transaction">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 5a1 1 0 0 1 1 1v5h5a1 1 0 1 1 0 2h-5v5a1 1 0 1 1-2 0v-5H6a1 1 0 1 1 0-2h5V6a1 1 0 0 1 1-1Z"/>
+                    </svg>
+                    <span class="visually-hidden">Add Transaction</span>
+                </a>
+                <a class="icon-action" href="{% url 'expenses:transaction_list' %}" aria-label="View All Transactions" title="View All Transactions">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M5 6.5A1.5 1.5 0 1 1 5 3.5a1.5 1.5 0 0 1 0 3Zm3 0h11a1 1 0 1 0 0-2H8a1 1 0 1 0 0 2Zm-3 7A1.5 1.5 0 1 1 5 10.5a1.5 1.5 0 0 1 0 3Zm3 0h11a1 1 0 1 0 0-2H8a1 1 0 1 0 0 2Zm-3 7A1.5 1.5 0 1 1 5 17.5a1.5 1.5 0 0 1 0 3Zm3 0h11a1 1 0 1 0 0-2H8a1 1 0 1 0 0 2Z"/>
+                    </svg>
+                    <span class="visually-hidden">View All Transactions</span>
+                </a>
+            </div>
         </div>
     </section>
 
