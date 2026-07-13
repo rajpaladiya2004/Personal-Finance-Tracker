@@ -777,6 +777,10 @@ button {
     white-space: nowrap;
 }
 
+.transaction-table .table-mobile-label {
+    display: none;
+}
+
 .table-link,
 .back-link,
 .inline-link {
@@ -1078,6 +1082,73 @@ hr {
         padding: 10px 8px;
         white-space: normal;
         word-break: break-word;
+    }
+
+    .transaction-table {
+        table-layout: auto;
+    }
+
+    .transaction-table thead {
+        display: none;
+    }
+
+    .transaction-table,
+    .transaction-table tbody,
+    .transaction-table tr,
+    .transaction-table td {
+        display: block;
+        width: 100%;
+    }
+
+    .transaction-table tbody tr {
+        margin-bottom: 14px;
+        border: 1px solid rgba(223, 229, 234, 0.9);
+        border-radius: 18px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 10px 20px rgba(32, 56, 74, 0.04);
+    }
+
+    .transaction-table td {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(223, 229, 234, 0.72);
+        white-space: normal;
+        word-break: normal;
+        overflow-wrap: anywhere;
+    }
+
+    .transaction-table td::before {
+        content: attr(data-label);
+        flex: 0 0 38%;
+        max-width: 38%;
+        color: var(--muted);
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .transaction-table td.table-actions {
+        display: block;
+        white-space: normal;
+    }
+
+    .transaction-table td.table-actions::before {
+        content: "Actions";
+        display: block;
+        margin-bottom: 8px;
+        color: var(--muted);
+        font-weight: 700;
+    }
+
+    .transaction-table td.table-actions .table-mobile-label {
+        display: none;
+    }
+
+    .transaction-table .table-link {
+        margin: 0 8px 8px 0;
     }
 
     .dashboard-card h2 {
