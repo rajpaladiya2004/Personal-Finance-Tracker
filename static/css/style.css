@@ -502,9 +502,38 @@ button {
     font-size: 1.05rem;
 }
 
-.contact-page {
-    display: block;
+.info-page {
     width: 100%;
+    display: grid;
+    gap: 18px;
+}
+
+.info-hero {
+    margin-bottom: 4px;
+}
+
+.info-hero h1 {
+    margin-bottom: 10px;
+}
+
+.info-hero p {
+    max-width: 760px;
+}
+
+.info-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 10px 24px rgba(32, 56, 74, 0.05);
+}
+
+.info-card h2 {
+    margin-top: 0;
+}
+
+.info-card p {
+    margin-bottom: 0;
 }
 
 .contact-form {
@@ -522,6 +551,10 @@ button {
 
 .contact-intro p {
     max-width: 720px;
+}
+
+.contact-form.info-card {
+    padding: 22px;
 }
 
 .page-actions {
