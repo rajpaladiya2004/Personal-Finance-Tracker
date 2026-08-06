@@ -842,6 +842,18 @@ button {
     margin-top: 8px;
 }
 
+.pagination {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.pagination-status {
+    color: var(--muted);
+    font-weight: 700;
+}
+
 .inline-link {
     display: inline;
     min-height: 0;

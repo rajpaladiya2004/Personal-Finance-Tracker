@@ -23,6 +23,18 @@
                     </div>
                 </div>
             {% endfor %}
+
+            {% if notifications.has_other_pages %}
+                <div class="pagination">
+                    {% if notifications.has_previous %}
+                        <a class="table-link" href="?page={{ notifications.previous_page_number }}">Previous</a>
+                    {% endif %}
+                    <span class="pagination-status">Page {{ notifications.number }} of {{ notifications.paginator.num_pages }}</span>
+                    {% if notifications.has_next %}
+                        <a class="table-link" href="?page={{ notifications.next_page_number }}">Next</a>
+                    {% endif %}
+                </div>
+            {% endif %}
         {% else %}
             <div class="info-card">
                 <p>Your notifications will appear here.</p>

@@ -45,6 +45,18 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if transactions.has_other_pages %}
+            <div class="pagination">
+                {% if transactions.has_previous %}
+                    <a class="table-link" href="?page={{ transactions.previous_page_number }}">Previous</a>
+                {% endif %}
+                <span class="pagination-status">Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}</span>
+                {% if transactions.has_next %}
+                    <a class="table-link" href="?page={{ transactions.next_page_number }}">Next</a>
+                {% endif %}
+            </div>
+        {% endif %}
     {% else %}
         <p>No transactions yet. <a class="inline-link" href="{% url 'expenses:add_transaction' %}">Add one now.</a></p>
     {% endif %}

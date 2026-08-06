@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
 from django.views.decorators.http import require_POST
@@ -97,7 +98,9 @@ def profile_settings(request):
 @login_required
 def notifications(request):
     notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'expenses/notifications.html', {'notifications': notifications})
+    paginator = Paginator(notifications, 10)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    return render(request, 'expenses/notifications.html', {'notifications': page_obj})
 
 
 @login_required
@@ -212,7 +215,9 @@ def delete_transaction(request, transaction_id):
 @login_required
 def transaction_list(request):
     transactions = Transaction.objects.filter(user=request.user).order_by('-date')
-    return render(request, 'expenses/transaction_list.html', {'transactions': transactions})
+    paginator = Paginator(transactions, 10)
+    page_obj = paginator.get_page(request.GET.get('page'))
+    return render(request, 'expenses/transaction_list.html', {'transactions': page_obj})
 
 
 @login_required
