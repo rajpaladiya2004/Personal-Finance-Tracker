@@ -813,8 +813,18 @@ button {
     transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
 }
 
-.table-link + .table-link {
+.table-link + .table-link,
+.table-delete-form {
     margin-left: 10px;
+}
+
+.table-delete-form {
+    display: inline-flex;
+}
+
+.table-delete-form .table-link {
+    font: inherit;
+    cursor: pointer;
 }
 
 .table-link-edit {
@@ -1191,7 +1201,8 @@ hr {
         display: none;
     }
 
-    .transaction-table .table-link {
+    .transaction-table .table-link,
+    .transaction-table .table-delete-form {
         margin: 0 8px 8px 0;
     }
 

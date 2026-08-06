@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
+from django.views.decorators.http import require_POST
 from .forms import CategoryForm, RegisterForm, TransactionForm, UserProfileForm
 from .models import Category, Notification, Transaction, UserProfile
 
@@ -195,6 +196,7 @@ def edit_transaction(request, transaction_id):
 
 
 @login_required
+@require_POST
 def delete_transaction(request, transaction_id):
     transaction = Transaction.objects.filter(id=transaction_id, user=request.user).first()
 

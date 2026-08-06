@@ -36,7 +36,10 @@
                     <td class="table-actions">
                         <span class="table-mobile-label">Actions</span>
                         <a class="table-link table-link-edit" href="{% url 'expenses:edit_transaction' transaction.id %}">Edit</a>
-                        <a class="table-link table-link-delete" href="{% url 'expenses:delete_transaction' transaction.id %}">Delete</a>
+                        <form class="table-delete-form" method="POST" action="{% url 'expenses:delete_transaction' transaction.id %}" onsubmit="return confirm('Delete this transaction?');">
+                            {% csrf_token %}
+                            <button type="submit" class="table-link table-link-delete">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 {% endfor %}

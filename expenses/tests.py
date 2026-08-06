@@ -297,7 +297,7 @@ class DeleteTransactionTests(TestCase):
     def test_delete_transaction_removes_item_and_redirects(self):
         self.client.login(username='student', password='testpass123')
 
-        response = self.client.get(
+        response = self.client.post(
             reverse('expenses:delete_transaction', args=[self.transaction.id])
         )
 
@@ -319,7 +319,7 @@ class DeleteTransactionTests(TestCase):
     def test_delete_non_existing_transaction_shows_error_and_redirects(self):
         self.client.login(username='student', password='testpass123')
 
-        response = self.client.get(
+        response = self.client.post(
             reverse('expenses:delete_transaction', args=[9999])
         )
 
