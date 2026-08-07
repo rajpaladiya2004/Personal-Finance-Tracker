@@ -38,7 +38,7 @@
                             <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not added yet" }}</p>
                         </div>
                         <a href="{% url 'expenses:change_password' %}">Change Password</a>
-                        <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a>
+                        <a href="{% url 'expenses:profile' %}">Profile Settings</a>
                         <a href="{% url 'expenses:delete_account' %}">Delete Account</a>
                     </div>
                 </details>
@@ -86,7 +86,7 @@
             <div class="mobile-nav-section">
                 <p>Account</p>
                 <a href="{% url 'expenses:change_password' %}">Change Password</a>
-                <a href="{% url 'expenses:profile_settings' %}">Profile Settings</a>
+                <a href="{% url 'expenses:profile' %}">Profile Settings</a>
                 <a href="{% url 'expenses:delete_account' %}">Delete Account</a>
             </div>
 

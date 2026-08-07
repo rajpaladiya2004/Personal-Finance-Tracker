@@ -81,11 +81,6 @@ def delete_account(request):
 
 
 @login_required
-def profile_settings(request):
-    return render(request, 'expenses/profile_settings.html')
-
-
-@login_required
 def notifications(request):
     notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
     paginator = Paginator(notifications, 10)

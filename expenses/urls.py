@@ -39,7 +39,6 @@ urlpatterns = [
     ),
     path('delete-account/', views.delete_account, name='delete_account'),
     path('delete-account/confirm/', views.delete_account, name='delete_account_confirm'),
-    path('profile-settings/', views.profile_settings, name='profile_settings'),
     path('notifications/', views.notifications, name='notifications'),
     path('help-support/', views.help_support, name='help_support'),
     path('terms-conditions/', views.terms_conditions, name='terms_conditions'),
