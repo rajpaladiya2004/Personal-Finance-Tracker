@@ -35,7 +35,7 @@
                         <div class="nav-profile-panel">
                             <p><strong>Username:</strong> {{ user.username }}</p>
                             <p><strong>Email:</strong> {{ user.email }}</p>
-                            <p><strong>Phone:</strong> {{ profile.phone_number|default:"Not added yet" }}</p>
+                            <p><strong>Phone:</strong> {{ user.userprofile.phone_number|default:"Not added yet" }}</p>
                         </div>
                         <a href="{% url 'expenses:change_password' %}">Change Password</a>
                         <a href="{% url 'expenses:profile' %}">Profile Settings</a>
