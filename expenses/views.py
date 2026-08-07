@@ -81,16 +81,6 @@ def delete_account(request):
 
 
 @login_required
-def order_history(request):
-    return render(request, 'expenses/order_history.html')
-
-
-@login_required
-def wishlist(request):
-    return render(request, 'expenses/wishlist.html')
-
-
-@login_required
 def profile_settings(request):
     return render(request, 'expenses/profile_settings.html')
 
@@ -131,16 +121,6 @@ def contact_us(request):
 @login_required
 def faq(request):
     return render(request, 'expenses/faq.html')
-
-
-@login_required
-def refund_policy(request):
-    return render(request, 'expenses/refund_policy.html')
-
-
-@login_required
-def shipping_policy(request):
-    return render(request, 'expenses/shipping_policy.html')
 
 
 @login_required
