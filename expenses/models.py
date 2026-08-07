@@ -43,6 +43,21 @@ class Transaction(models.Model):
         ordering = ['-date']
 
 
+class ContactMessage(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.subject} - {self.name}"
+
+    class Meta:
+        ordering = ['-created_at']
+
+
 class Notification(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)

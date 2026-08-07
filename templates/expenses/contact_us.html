@@ -12,20 +12,24 @@
         <form method="post" class="contact-form info-card">
             {% csrf_token %}
             <p>
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" required>
+                <label for="{{ form.name.id_for_label }}">Name</label>
+                {{ form.name }}
+                {{ form.name.errors }}
             </p>
             <p>
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" required>
+                <label for="{{ form.email.id_for_label }}">Email</label>
+                {{ form.email }}
+                {{ form.email.errors }}
             </p>
             <p>
-                <label for="subject">Subject</label>
-                <input type="text" id="subject" name="subject" required>
+                <label for="{{ form.subject.id_for_label }}">Subject</label>
+                {{ form.subject }}
+                {{ form.subject.errors }}
             </p>
             <p>
-                <label for="message">Message</label>
-                <textarea id="message" name="message" rows="10" required></textarea>
+                <label for="{{ form.message.id_for_label }}">Message</label>
+                {{ form.message }}
+                {{ form.message.errors }}
             </p>
             <button type="submit">Send Message</button>
         </form>

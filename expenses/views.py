@@ -6,7 +6,7 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.db.models.functions import TruncMonth, TruncYear
 from django.views.decorators.http import require_POST
-from .forms import CategoryForm, RegisterForm, TransactionForm, UserProfileForm
+from .forms import CategoryForm, ContactMessageForm, RegisterForm, TransactionForm, UserProfileForm
 from .models import Category, Notification, Transaction, UserProfile
 
 
@@ -110,7 +110,16 @@ def about_us(request):
 
 @login_required
 def contact_us(request):
-    return render(request, 'expenses/contact_us.html')
+    if request.method == 'POST':
+        form = ContactMessageForm(request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent. We will get back to you soon.')
+            return redirect('expenses:contact_us')
+        messages.error(request, 'Please correct the errors below.')
+    else:
+        form = ContactMessageForm()
+    return render(request, 'expenses/contact_us.html', {'form': form})
 
 
 @login_required
