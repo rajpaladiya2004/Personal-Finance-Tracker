@@ -10,6 +10,7 @@
     </div>
 
     {% if transactions %}
+        <div class="table-scroll">
         <table class="transaction-table">
             <thead>
                 <tr>
@@ -45,6 +46,7 @@
                 {% endfor %}
             </tbody>
         </table>
+        </div>
 
         {% if transactions.has_other_pages %}
             <div class="pagination">

@@ -445,7 +445,7 @@ table td {
     padding: 14px 16px;
     text-align: left;
     border-bottom: 1px solid var(--line);
-    vertical-align: top;
+    vertical-align: middle;
     word-break: break-word;
 }
 
@@ -799,7 +799,20 @@ button {
     box-shadow: 0 12px 22px rgba(32, 56, 74, 0.10);
 }
 
+.table-scroll {
+    overflow-x: auto;
+}
+
+.transaction-table {
+    min-width: 820px;
+    table-layout: auto;
+}
+
 .table-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
     white-space: nowrap;
 }
 
@@ -831,11 +844,18 @@ button {
 
 .table-delete-form {
     display: inline-flex;
+    align-items: center;
+    width: auto;
+    height: auto;
+    border: none;
+    background: none;
+    box-shadow: none;
 }
 
 .table-delete-form .table-link {
     appearance: none;
     font: inherit;
+    line-height: normal;
     margin: 0;
     cursor: pointer;
 }
