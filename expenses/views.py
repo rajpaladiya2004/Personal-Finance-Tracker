@@ -156,7 +156,7 @@ def add_transaction(request):
             Notification.objects.create(
                 user=request.user,
                 title=f'New {transaction_label.lower()} added',
-                message=f'{transaction_label}: {transaction.title} - {transaction.amount}',
+                message=f'{transaction_label}: {transaction.title} - €{transaction.amount}',
                 transaction=transaction,
             )
             messages.success(request, 'Transaction added successfully.')

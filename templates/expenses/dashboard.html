@@ -20,15 +20,15 @@
     <div class="summary-boxes">
         <div class="summary-box income">
             <h3>Total Income</h3>
-            <p>{{ total_income }}</p>
+            <p>&euro;{{ total_income }}</p>
         </div>
         <div class="summary-box expense">
             <h3>Total Expenses</h3>
-            <p>{{ total_expenses }}</p>
+            <p>&euro;{{ total_expenses }}</p>
         </div>
         <div class="summary-box balance">
             <h3>Balance</h3>
-            <p>{{ balance }}</p>
+            <p>&euro;{{ balance }}</p>
         </div>
     </div>
 
@@ -47,7 +47,7 @@
                         {% for item in category_expenses %}
                         <tr>
                             <td>{{ item.category__name|default:"Uncategorized" }}</td>
-                            <td>{{ item.total }}</td>
+                            <td>&euro;{{ item.total }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -73,7 +73,7 @@
                         {% for transaction in recent_transactions %}
                         <tr>
                             <td>{{ transaction.title }}</td>
-                            <td>{{ transaction.amount }}</td>
+                            <td>&euro;{{ transaction.amount }}</td>
                             <td>{{ transaction.get_transaction_type_display }}</td>
                             <td>{{ transaction.date }}</td>
                         </tr>
@@ -101,7 +101,7 @@
                         {% for item in monthly_expenses %}
                         <tr>
                             <td>{{ item.month|date:"F Y" }}</td>
-                            <td>{{ item.total }}</td>
+                            <td>&euro;{{ item.total }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -125,7 +125,7 @@
                         {% for item in yearly_expenses %}
                         <tr>
                             <td>{{ item.year|date:"Y" }}</td>
-                            <td>{{ item.total }}</td>
+                            <td>&euro;{{ item.total }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

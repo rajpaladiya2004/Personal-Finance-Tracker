@@ -28,7 +28,7 @@
                 <tr>
                     <td data-label="#">{{ forloop.counter }}</td>
                     <td data-label="Title">{{ transaction.title }}</td>
-                    <td data-label="Amount">{{ transaction.amount }}</td>
+                    <td data-label="Amount">&euro;{{ transaction.amount }}</td>
                     <td data-label="Type">{{ transaction.get_transaction_type_display }}</td>
                     <td data-label="Category">{{ transaction.category }}</td>
                     <td data-label="Description">{{ transaction.description }}</td>
