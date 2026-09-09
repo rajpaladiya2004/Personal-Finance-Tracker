@@ -11,6 +11,9 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'name'], name='unique_category_name_per_user'),
+        ]
 
 
 class UserProfile(models.Model):
