@@ -60,11 +60,14 @@
                     </svg>
                 </a>
 
-                <a class="nav-icon nav-icon-logout" href="{% url 'expenses:logout' %}" aria-label="Logout" title="Logout">
-                    <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M10 17.5a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h4a1 1 0 1 0 0-2h-4Zm8.7-5.2-2.1-2.1a1 1 0 1 0-1.4 1.4l.4.4H13a1 1 0 1 0 0 2h2.6l-.4.4a1 1 0 1 0 1.4 1.4l2.1-2.1a1 1 0 0 0 0-1.4Z"/>
-                    </svg>
-                </a>
+                <form class="nav-logout-form" method="POST" action="{% url 'expenses:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-icon nav-icon-logout" aria-label="Logout" title="Logout">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M10 17.5a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a1 1 0 0 1 0-2h4a1 1 0 1 0 0-2h-4a3 3 0 0 0-3 3v8a3 3 0 0 0 3 3h4a1 1 0 1 0 0-2h-4Zm8.7-5.2-2.1-2.1a1 1 0 1 0-1.4 1.4l.4.4H13a1 1 0 1 0 0 2h2.6l-.4.4a1 1 0 1 0 1.4 1.4l2.1-2.1a1 1 0 0 0 0-1.4Z"/>
+                        </svg>
+                    </button>
+                </form>
             </div>
         </nav>
 
@@ -99,7 +102,10 @@
 
             <div class="mobile-nav-section">
                 <a class="mobile-nav-action" href="/notifications/">Notifications</a>
-                <a class="mobile-nav-action danger" href="{% url 'expenses:logout' %}">Logout</a>
+                <form class="mobile-nav-logout-form" method="POST" action="{% url 'expenses:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="mobile-nav-action danger">Logout</button>
+                </form>
             </div>
         </aside>
     </header>

@@ -177,6 +177,17 @@ a:hover {
     border-color: rgba(180, 35, 24, 0.22);
 }
 
+.nav-logout-form {
+    display: inline-flex;
+    flex: 0 0 auto;
+}
+
+.nav-icon-logout {
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+}
+
 .nav-menu {
     position: relative;
 }
@@ -1112,6 +1123,27 @@ hr {
 
     .mobile-nav-action.danger:hover {
         background: #fff1f0;
+    }
+
+    .mobile-nav-logout-form {
+        display: flex;
+        width: 100%;
+    }
+
+    .mobile-nav-logout-form .mobile-nav-action {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 42px;
+        width: 100%;
+        min-width: 0;
+        padding: 12px 14px;
+        border-radius: 14px;
+        font: inherit;
+        font-weight: 700;
+        line-height: 1.35;
+        cursor: pointer;
+        border: 1px solid rgba(223, 229, 234, 0.8);
     }
 
     .container {
