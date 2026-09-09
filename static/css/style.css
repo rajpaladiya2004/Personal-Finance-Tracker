@@ -834,7 +834,9 @@ button {
 }
 
 .table-delete-form .table-link {
+    appearance: none;
     font: inherit;
+    margin: 0;
     cursor: pointer;
 }
 
