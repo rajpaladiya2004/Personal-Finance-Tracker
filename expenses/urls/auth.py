@@ -1,9 +1,8 @@
-from django.urls import path
 from django.contrib.auth import views as auth_views
+from django.urls import path
 from django.views.generic import TemplateView
-from . import views
 
-app_name = 'expenses'
+from .. import views
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -39,23 +38,5 @@ urlpatterns = [
     ),
     path('delete-account/', views.delete_account, name='delete_account'),
     path('delete-account/confirm/', views.delete_account, name='delete_account_confirm'),
-    path('notifications/', views.notifications, name='notifications'),
-    path('help-support/', views.help_support, name='help_support'),
-    path('terms-conditions/', views.terms_conditions, name='terms_conditions'),
-    path('privacy-policy/', views.privacy_policy, name='privacy_policy'),
-    path('about-us/', views.about_us, name='about_us'),
-    path('contact-us/', views.contact_us, name='contact_us'),
-    path('faq/', views.faq, name='faq'),
     path('profile/', views.profile, name='profile'),
-    path('category/add/', views.add_category, name='add_category'),
-    path('category/', views.category_list, name='category_list'),
-    path('transaction/add/', views.add_transaction, name='add_transaction'),
-    path('transactions/edit/<int:transaction_id>/', views.edit_transaction, name='edit_transaction'),
-    path('transactions/delete/<int:transaction_id>/', views.delete_transaction, name='delete_transaction'),
-    path('transaction/', views.transaction_list, name='transaction_list'),
-    path('dashboard/', views.dashboard, name='dashboard'),
 ]
-
-
-
-
